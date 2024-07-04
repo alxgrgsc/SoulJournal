@@ -1,0 +1,2 @@
+# SoulJournal
+Thesis Project
