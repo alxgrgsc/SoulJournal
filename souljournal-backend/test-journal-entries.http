@@ -1,0 +1,35 @@
+### Create a New Journal Entry
+POST http://localhost:3000/journal_entries
+Content-Type: application/json
+
+{
+  "title": "Bad Entry",
+  "content": "This is how my day went."
+}
+
+###
+
+### Get All Journal Entries
+GET http://localhost:3000/journal_entries
+
+###
+
+### Get a Specific Journal Entry (Replace :id with actual ID)
+GET http://localhost:3000/journal_entries/668ac7bcf5df99e58a539598
+
+###
+
+### Update a Journal Entry (Replace :id with actual ID)
+PATCH http://localhost:3000/journal_entries/668ac7bcf5df99e58a539598
+Content-Type: application/json
+
+{
+  "content": "Updated content of the journal entry."
+}
+
+###
+
+### Delete a Journal Entry (Replace :id with actual ID)
+DELETE http://localhost:3000/journal_entries/668ac801f5df99e58a53959e
+
+###

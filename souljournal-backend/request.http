@@ -1,0 +1,28 @@
+### User Registration
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+  "email": "alex@gmail.com",
+  "password": "password123"
+}
+
+###
+
+### User Login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "alex@gmail.com",
+  "password": "password123"
+}
+
+### User Invalid Login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "alex@gmail.com",
+  "password": "password1234"
+}
