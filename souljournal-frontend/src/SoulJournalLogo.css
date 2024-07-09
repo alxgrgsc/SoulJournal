@@ -44,11 +44,10 @@
   width: 0%; /* Initial width */
   opacity: 1; /* Ensure the bar is fully visible when it appears */
   animation-fill-mode: forwards; /* Keep the last keyframe state */
-}
-
-.logo-text:hover::after {
   animation: slideInThenOut 1.5s ease-in-out; /* Apply the animation */
 }
+
+
 
 .logo-part {
   margin: 0 5px;
