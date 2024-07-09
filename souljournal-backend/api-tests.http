@@ -1,0 +1,13 @@
+### Submit Feedback
+POST http://localhost:3000/feedback HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Dylan Doe",
+  "feedback": "Really enjoying the journaling feature!"
+}
+
+###
+
+### Get All Feedback
+GET http://localhost:3000/feedback HTTP/1.1

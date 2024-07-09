@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes'); // Adjust the path as necessary
 const journalRoutes = require('./routes/journalRoutes'); // Require the journalRoutes
+const feedbackRoutes = require('./routes/feedbackRoutes'); 
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,6 +11,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(authRoutes);
 app.use(journalRoutes); // Use journalRoutes with a base path
+app.use(feedbackRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello SoulJournal!');
