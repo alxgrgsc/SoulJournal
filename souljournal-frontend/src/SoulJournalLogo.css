@@ -1,0 +1,69 @@
+/* src/SoulJournalLogo.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  letter-spacing: 4px;
+  position: relative; /* Added to establish a positioning context */
+}
+
+@keyframes slideInThenOut {
+  0% {
+    width: 0%;
+    left: 0;
+  }
+  50% {
+    width: 100%;
+    left: 0;
+  }
+  100% {
+    width: 0%;
+    left: 100%;
+  }
+}
+
+.logo-text::after {
+  content: '';
+  position: absolute;
+  height: 4px; /* Height of the bar */
+  background-color: #000000; /* Light orange color */
+  top: -10px; /* Position the bar above the text */
+  left: 0;
+  width: 0%; /* Initial width */
+  opacity: 1; /* Ensure the bar is fully visible when it appears */
+  animation-fill-mode: forwards; /* Keep the last keyframe state */
+}
+
+.logo-text:hover::after {
+  animation: slideInThenOut 1.5s ease-in-out; /* Apply the animation */
+}
+
+.logo-part {
+  margin: 0 5px;
+}
+
+.logo-part-journal {
+  margin-left: 5px;
+}
+
+.logo-subtext {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.2rem;
+  color: #555;
+  font-weight: 300;
+  font-style: italic;
+  margin-top: 5px;
+  letter-spacing: 4px;
+}
