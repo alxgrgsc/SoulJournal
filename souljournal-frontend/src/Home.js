@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SoulJournalLogo from './SoulJournalLogo'; // Adjust the import path if necessary
 import './Home.css'; // Ensure you have this CSS file
 
@@ -10,8 +11,12 @@ function Home() {
       </div>
       <p className="tagline">Write, reflect, transform daily.</p>
       <div className="buttons">
-        <button className="button">Register</button>
-        <button className="button">Login</button>
+        <Link to="/register">
+          <button className="button">Register</button>
+        </Link>
+        <Link to="/login">
+          <button className="button">Login</button>
+        </Link>
       </div>
     </div>
   );
