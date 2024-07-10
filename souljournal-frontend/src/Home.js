@@ -17,6 +17,9 @@ function Home() {
         <Link to="/login">
           <button className="button">Login</button>
         </Link>
+        <Link to="/feedback">
+          <button className="button">Feedback</button>
+        </Link>
       </div>
     </div>
   );
