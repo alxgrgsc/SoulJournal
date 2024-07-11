@@ -1,0 +1,80 @@
+body {
+  font-family: 'Nunito', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  margin: 0;
+  text-align: center;
+}
+
+
+.quote-container {
+  padding-top: 10%;
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: slideDown 0.5s forwards;
+  transition: opacity 1s ease-in;
+}
+
+.quote-container.loaded {
+  opacity: 1;
+}
+
+@keyframes slideDown {
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.quote-text {
+  font-size: 1.5rem;
+  max-width: 100%;
+  font-style: italic;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 10px;
+  padding: 0 20px; /* Add padding for better readability */
+}
+
+.quote-author {
+  font-size: 1.2rem;
+  color: #777;
+  margin-bottom: 20px;
+  padding: 0 20px; /* Add padding for better readability */
+}
+
+.quote-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #485869;
+  background-color: white;
+  color: #485869;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+.button:hover {
+  background-color: #485869;
+  color: #fff;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0;
+  width: 100%;
+  background-color: #f1f1f1;
+}

@@ -1,10 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './Home'; // Adjust the import path if necessary
-import Register from './Register'; // Adjust the import path if necessary
+import Home from './Home';
+import Register from './Register';
 import Login from './Login';
-import ForgotPassword from './ForgotPassword'; // Import the new component
-import Feedback from './Feedback'; // Import the Feedback component
+import ForgotPassword from './ForgotPassword';
+import Feedback from './Feedback';
+import RegistrationSuccess from './RegistrationSuccess';
+import Dashboard from './Dashboard';
+import Quotes from './Quotes'; // Import the Quotes component
 
 function App() {
   return (
@@ -15,8 +18,11 @@ function App() {
             <Route exact path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} /> {/* Add the new route */}
-            <Route path="/feedback" element={<Feedback />} /> {/* Add the feedback route */}
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/feedback" element={<Feedback />} />
+            <Route path="/registration-success" element={<RegistrationSuccess />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/quotes" element={<Quotes />} /> {/* Add the new route */}
           </Routes>
         </header>
       </div>

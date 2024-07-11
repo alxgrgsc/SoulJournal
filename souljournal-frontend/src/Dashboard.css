@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 50vh;
+  text-align: center;
+  padding-top: 10%;
+}
+
+.dashboard-title {
+  font-size: 2em;
+  margin-bottom: 20px;
+  font-style: italic;
+  font-weight: bold;
+  color: #555;
+}
+
+.dashboard-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dashboard-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #485869;
+  background-color: white;
+  color: #485869;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.dashboard-button:hover {
+  background-color: #485869;
+  color: #fff;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .dashboard-title {
+    font-size: 2rem;
+  }
+
+  .dashboard {
+    padding-top: 15%;
+  }
+
+  .dashboard-button {
+    font-size: 2rem;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .dashboard-title {
+    font-size: 2.5rem;
+  }
+
+  .dashboard {
+    padding-top: 15%;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .dashboard-title {
+    font-size: 3rem;
+  }
+
+  .dashboard {
+    padding-top: 15%;
+  }
+}
