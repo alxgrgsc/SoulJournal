@@ -15,7 +15,21 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 300px;
   text-align: center;
+  transform: translateY(-50px);
+  animation: slideDown 1.5s forwards;
 }
+
+@keyframes slideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.feedback-container.show {
+  animation: slideDown 1.5s forwards;
+}
+
 
 h1 {
   margin-bottom: 10px;

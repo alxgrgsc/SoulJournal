@@ -4,9 +4,10 @@ import './Feedback.css';
 const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className="feedback-container">
+    <div className={`feedback-container ${isLoaded ? 'show': ''}`} >
       <h1>We value your feedback!</h1>
       <p>Please share your thoughts with us.</p>
 

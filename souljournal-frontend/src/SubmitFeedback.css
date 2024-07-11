@@ -1,0 +1,26 @@
+.submit-feedback-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.submit-feedback-container h1 {
+  margin-bottom: 20px;
+}
+
+.submit-feedback-container p {
+  margin-bottom: 20px;
+}
+
+.submit-feedback-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+}

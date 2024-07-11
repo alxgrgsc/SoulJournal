@@ -7,7 +7,8 @@ import ForgotPassword from './ForgotPassword';
 import Feedback from './Feedback';
 import RegistrationSuccess from './RegistrationSuccess';
 import Dashboard from './Dashboard';
-import Quotes from './Quotes'; // Import the Quotes component
+import Quotes from './Quotes';
+import SubmitFeedback from './SubmitFeedback'; // Import the SubmitFeedback component
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/registration-success" element={<RegistrationSuccess />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/quotes" element={<Quotes />} /> {/* Add the new route */}
+            <Route path="/quotes" element={<Quotes />} />
+            <Route path="/submit-feedback" element={<SubmitFeedback />} /> {/* Add the new route */}
           </Routes>
         </header>
       </div>

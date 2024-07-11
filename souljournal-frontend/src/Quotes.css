@@ -9,17 +9,12 @@ body {
   text-align: center;
 }
 
-
 .quote-container {
   padding-top: 10%;
   opacity: 0;
   transform: translateY(-50px);
-  animation: slideDown 0.5s forwards;
-  transition: opacity 1s ease-in;
-}
-
-.quote-container.loaded {
-  opacity: 1;
+  animation: slideDown 2s forwards;
+  transition: opacity 5s ease-in-out; /* Add this line for the opacity transition */
 }
 
 @keyframes slideDown {
@@ -31,7 +26,7 @@ body {
 
 .quote-text {
   font-size: 1.5rem;
-  max-width: 100%;
+  max-width: 50ch; /* Limit the width to 50 characters */
   font-style: italic;
   font-weight: bold;
   color: #555;
@@ -50,6 +45,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 10px;
+  margin-top: 30%;
   margin-bottom: 20px;
 }
 
