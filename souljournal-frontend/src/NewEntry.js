@@ -1,27 +1,36 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './NewEntry.css';
 
 const NewEntry = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const navigate = useNavigate();
   const currentDate = new Date().toLocaleDateString();
 
-  const handleSaveEntry = () => {
-    // Logic to save the entry goes here
-    console.log('Entry saved:', { title, content });
+  const handleDiscard = () => {
+    if (window.confirm('Your entry will be discarded, are you sure?')) {
+      setTitle('');
+      setContent('');
+    }
   };
 
-  const handleDiscardEntry = () => {
-    setTitle('');
-    setContent('');
+  const handleNavigation = (path) => {
+    if (window.confirm('Your entry will be discarded, are you sure?')) {
+      // Navigate to the specified path
+      window.location.href = path;
+    }
+  };
+
+  const handleSave = () => {
+    // Implement save functionality here
+    console.log('Entry saved:', { title, content });
+    // You can add code to save the entry to a database or state management
   };
 
   return (
     <div className="new-entry-container">
+      <h1 className="new-entry-title">New Entry</h1>
       <div className="new-entry-date">Date: {currentDate}</div>
-      <div className="new-entry-title">
+      <div className="entry-title">
         <label htmlFor="title">Title:</label>
         <input
           type="text"
@@ -40,13 +49,11 @@ const NewEntry = () => {
         ></textarea>
       </div>
       <div className="new-entry-buttons">
-        <button onClick={handleSaveEntry}>Save Entry</button>
-        <button onClick={handleDiscardEntry}>Discard Entry</button>
-      </div>
-      <div className="new-entry-navigation">
-        <button onClick={() => navigate('/')}>Home</button>
-        <button onClick={() => navigate('/journal')}>Journal</button>
-        <button onClick={() => navigate('/settings')}>Settings</button>
+        <button onClick={handleDiscard}>Discard Entry</button>
+        <button onClick={() => handleNavigation('/home')}>Home</button>
+        <button onClick={() => handleNavigation('/journal')}>Journal</button>
+        <button onClick={() => handleNavigation('/settings')}>Settings</button>
+        <button onClick={handleSave}>Save Entry</button> {/* Added Save Entry button */}
       </div>
     </div>
   );
