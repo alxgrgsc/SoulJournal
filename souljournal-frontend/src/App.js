@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Register from './Register';
 import Login from './Login';
@@ -8,7 +8,8 @@ import Feedback from './Feedback';
 import RegistrationSuccess from './RegistrationSuccess';
 import Dashboard from './Dashboard';
 import Quotes from './Quotes';
-import SubmitFeedback from './SubmitFeedback'; // Import the SubmitFeedback component
+import SubmitFeedback from './SubmitFeedback';
+import NewEntry from './NewEntry'; // Import the NewEntry component
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
             <Route path="/registration-success" element={<RegistrationSuccess />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/quotes" element={<Quotes />} />
-            <Route path="/submit-feedback" element={<SubmitFeedback />} /> {/* Add the new route */}
+            <Route path="/submit-feedback" element={<SubmitFeedback />} />
+            <Route path="/new-entry" element={<NewEntry />} /> {/* Add the new route */}
           </Routes>
         </header>
       </div>

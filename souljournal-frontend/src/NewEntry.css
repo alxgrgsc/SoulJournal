@@ -1,0 +1,66 @@
+/* NewEntry.css */
+
+.new-entry-container {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: 'Nunito', sans-serif;
+}
+
+.new-entry-date {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.new-entry-title,
+.new-entry-content {
+  margin-bottom: 20px;
+}
+
+.new-entry-title label,
+.new-entry-content label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.new-entry-title input,
+.new-entry-content textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.new-entry-content textarea {
+  font-family: 'Nunito', cursive;
+}
+
+.new-entry-buttons,
+.new-entry-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.new-entry-buttons button,
+.new-entry-navigation button {
+  padding: 10px;
+  background-color: white;
+  color: #485869;
+  border: 1px solid #485869;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.new-entry-buttons button:hover,
+.new-entry-navigation button:hover {
+  background-color: #485869;
+  color: white;
+}

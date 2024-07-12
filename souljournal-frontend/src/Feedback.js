@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Feedback.css';
 
 const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  const handleSubmitFeedback = () => {
+    // Logic to submit feedback goes here
+    navigate('/submit-feedback');
+  };
 
   return (
-    <div className={`feedback-container ${isLoaded ? 'show': ''}`} >
+    <div className={`feedback-container ${isLoaded ? 'show' : ''}`}>
       <h1>We value your feedback!</h1>
       <p>Please share your thoughts with us.</p>
 
@@ -40,7 +51,7 @@ const Feedback = () => {
       <label htmlFor="email">Email:</label>
       <input type="email" id="email" placeholder="Enter your email" />
 
-      <button id="submit-feedback">Submit Feedback</button>
+      <button id="submit-feedback" onClick={handleSubmitFeedback}>Submit Feedback</button>
     </div>
   );
 };
