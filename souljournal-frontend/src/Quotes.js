@@ -54,7 +54,7 @@ const Quotes = () => {
                 <button className="button" onClick={shareQuote}>Share Quote</button>
             </div>
             <footer className="footer">
-                <button className="button" onClick={() => navigateTo('home')}>Home</button>
+                <button className="button" onClick={() => navigateTo('')}>Home</button>
                 <button className="button" onClick={() => navigateTo('journal')}>Journal</button>
                 <button className="button" onClick={() => navigateTo('settings')}>Settings</button>
             </footer>
