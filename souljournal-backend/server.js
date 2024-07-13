@@ -1,3 +1,5 @@
+require('dotenv').config(); // Load environment variables
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Import the cors package
@@ -18,11 +20,13 @@ app.get('/', (req, res) => {
   res.send('Hello SoulJournal!');
 });
 
-const dbURI = 'mongodb://localhost:27017/SoulJournal';
-mongoose.connect(dbURI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Failed to connect to MongoDB', err));
+// Load MongoDB URI from environment variables
+const dbURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/SoulJournal';
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log('JWT_SECRET:', process.env.JWT_SECRET); // Verify the JWT_SECRET is loaded
 });
