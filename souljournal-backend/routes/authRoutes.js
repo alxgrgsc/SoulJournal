@@ -1,33 +1,9 @@
 const express = require('express');
-const User = require('../models/User'); 
-const bcrypt = require('bcrypt');
-
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User'); // Adjust the path as necessary
 const router = express.Router();
-
-// User registration route
-router.post('/register', async (req, res) => {
-  try {
-    const { email, password, name } = req.body;
-
-    // Validate input
-    if (!email || !password || !name) {
-      return res.status(400).send({ error: 'Email, password, and name are required' });
-    }
-
-    // Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).send({ error: 'User already exists' });
-    }
-
-    // Create new user
-    const user = new User({ email, password, name });
-    await user.save();
-    res.status(201).send(user);
-  } catch (err) {
-    res.status(400).send(err);
-  }
-});
+require('dotenv').config(); // Load environment variables from .env file
 
 // User login route
 router.post('/login', async (req, res) => {
@@ -51,9 +27,14 @@ router.post('/login', async (req, res) => {
       return res.status(400).send({ error: 'Invalid email or password' });
     }
 
-    res.send(user);
-  } catch (err) {
-    res.status(400).send(err);
+    // Generate JWT token
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // Send token to client
+    res.json({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'Server error' });
   }
 });
 
