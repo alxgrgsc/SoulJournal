@@ -6,6 +6,7 @@ const cors = require('cors'); // Import the cors package
 const authRoutes = require('./routes/authRoutes'); // Ensure this path is correct
 const journalRoutes = require('./routes/journalRoutes'); // Ensure this path is correct
 const feedbackRoutes = require('./routes/feedbackRoutes'); // Ensure this path is correct
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 const PORT = 3300;
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use('/auth', authRoutes); // Use base path for auth routes
 app.use('/journals', journalRoutes); // Use base path for journal routes
 app.use('/feedback', feedbackRoutes); // Use base path for feedback routes
+app.use('/user', userRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello SoulJournal!');

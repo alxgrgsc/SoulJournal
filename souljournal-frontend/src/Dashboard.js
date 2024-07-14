@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
 
 const Dashboard = () => {
-  // Retrieve the email from localStorage
-  const email = localStorage.getItem('userEmail');
+  const [firstName, setFirstName] = useState('');
+
+  useEffect(() => {
+    // Retrieve the email from localStorage
+    const email = localStorage.getItem('userEmail');
+
+    // Fetch user details from the backend
+    const fetchUserDetails = async () => {
+      try {
+        const response = await fetch(`http://localhost:3300/user/details?email=${email}`);
+        const data = await response.json();
+        setFirstName(data.firstName);
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
 
   return (
     <div className="dashboard">
-      <h1>Welcome back, {email}!</h1>
+      <h1>Welcome back, {firstName}!</h1>
       <h1 className="dashboard-title">Dashboard</h1>
       <div className="dashboard-buttons">
         <Link to="/new-entry" className="dashboard-button">Create Entry</Link>

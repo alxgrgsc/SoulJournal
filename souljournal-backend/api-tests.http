@@ -11,3 +11,7 @@ Content-Type: application/json
 
 ### Get All Feedback
 GET http://localhost:3000/feedback HTTP/1.1
+
+
+//get user details
+GET http://localhost:3300/user/details?email=alex@gmail.com HTTP/1.1

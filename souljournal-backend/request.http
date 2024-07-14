@@ -26,3 +26,7 @@ Content-Type: application/json
   "email": "alex@gmail.com",
   "password": "password1234"
 }
+
+### User Details Request
+GET http://localhost:3300/user/details?email=alex@gmail.com
+Content-Type: application/json
