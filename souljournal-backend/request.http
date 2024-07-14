@@ -1,16 +1,16 @@
 ### User Registration
-POST http://localhost:3000/register
+POST http://localhost:3300/register
 Content-Type: application/json
 
 {
-  "email": "alex@gmail.com",
+  "email": "alex175@gmail.com",
   "password": "password123"
 }
 
 ###
 
 ### User Login
-POST http://localhost:3000/login
+POST http://localhost:3300/login
 Content-Type: application/json
 
 {
@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 
 ### User Invalid Login
-POST http://localhost:3000/login
+POST http://localhost:3300/login
 Content-Type: application/json
 
 {

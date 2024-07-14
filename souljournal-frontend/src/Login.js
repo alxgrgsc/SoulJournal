@@ -11,28 +11,24 @@ const Login = () => {
     e.preventDefault();
     setError('');
 
-    // Simulate an authentication check
-    const isAuthenticated = await fakeAuthCheck(email, password);
+    try {
+      const response = await fetch('http://localhost:3300/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (isAuthenticated) {
-      navigate('/dashboard');
-    } else {
-      setError('Invalid email or password');
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
+        navigate('/dashboard');
+      } else {
+        const data = await response.json();
+        setError(data.message || 'Login failed');
+      }
+    } catch (error) {
+      setError('An error occurred. Please try again.');
     }
-  };
-
-  // Simulated authentication function
-  const fakeAuthCheck = (email, password) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // Replace this with actual authentication logic
-        if (email === 'user@example.com' && password === 'password123') {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      }, 1000);
-    });
   };
 
   return (
@@ -50,14 +46,14 @@ const Login = () => {
           <input
             type="password"
             className="login-input"
-            placeholder="Password"
+            placeholder= "Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          {error && <p className="login-error">{error}</p>}
           <button type="submit" className="login-button">Login</button>
         </form>
-        {error && <p className="error-message">{error}</p>}
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ const journalRoutes = require('./routes/journalRoutes'); // Ensure this path is 
 const feedbackRoutes = require('./routes/feedbackRoutes'); // Ensure this path is correct
 
 const app = express();
-const PORT = process.env.PORT || 3300;
+const PORT = 3300;
 
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
 // Load MongoDB URI from environment variables
 const dbURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/SoulJournal';
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbURI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
