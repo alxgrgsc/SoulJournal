@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './Register.css';
 
 const Register = () => {
-  const [name, setName] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -21,7 +22,7 @@ const Register = () => {
       const response = await fetch('http://localhost:3300/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ firstname, lastname, email, password }),
       });
 
       if (response.ok) {
@@ -41,9 +42,15 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          placeholder="First Name"
+          value={firstname}
+          onChange={(e) => setFirstname(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
         />
         <input
           type="email"
@@ -63,8 +70,8 @@ const Register = () => {
           value={repeatPassword}
           onChange={(e) => setRepeatPassword(e.target.value)}
         />
-        {error && <p className="error">{error}</p>}
-        <button type="submit">Register</button>
+        {error && <p className="register-error">{error}</p>}
+        <button type="submit" className="register-button">Register</button>
       </form>
     </div>
   );

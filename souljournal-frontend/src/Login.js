@@ -21,6 +21,7 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
+        localStorage.setItem('userEmail', email); // Store the email in localStorage
         navigate('/dashboard');
       } else {
         const data = await response.json();

@@ -8,11 +8,11 @@ require('dotenv').config(); // Load environment variables from .env file
 // User registration route
 router.post('/register', async (req, res) => {
   try {
-    const { email, password, name } = req.body;
+    const { email, password, firstname, lastname } = req.body;
 
     // Validate input
-    if (!email || !password || !name) {
-      return res.status(400).send({ error: 'Email, password, and name are required' });
+    if (!email || !password || !firstname || !lastname) {
+      return res.status(400).send({ error: 'Email, password, firstname, and lastname are required' });
     }
 
     // Check if user already exists
@@ -22,15 +22,12 @@ router.post('/register', async (req, res) => {
     }
 
     // Create new user
-    const user = new User({ email, password, name });
+    const user = new User({ email, password, firstname, lastname });
     await user.save();
 
-    // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-    res.status(201).send({ user, token });
-  } catch (err) {
-    res.status(400).send({ error: 'An error occurred during registration' });
+    res.status(201).send({ message: 'User registered successfully' });
+  } catch (error) {
+    res.status(500).send({ error: 'An error occurred during registration' });
   }
 });
 
