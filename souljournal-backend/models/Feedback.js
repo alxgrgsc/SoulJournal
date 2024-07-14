@@ -13,6 +13,10 @@ const feedbackSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  email: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('Feedback', feedbackSchema);

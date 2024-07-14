@@ -10,12 +10,12 @@ Content-Type: application/json
 ###
 
 ### User Login
-POST http://localhost:3300/login
+POST http://localhost:3300/auth/login
 Content-Type: application/json
 
 {
   "email": "alex@gmail.com",
-  "password": "password123"
+  "password": "alex"
 }
 
 ### User Invalid Login

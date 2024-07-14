@@ -1,5 +1,5 @@
 ### Create a New Journal Entry
-POST http://localhost:3000/journal_entries
+POST http://localhost:3300/journal_entries
 Content-Type: application/json
 
 {
