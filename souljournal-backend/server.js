@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Routes
 app.use('/auth', authRoutes); // Use base path for auth routes
-app.use('/journals', journalRoutes); // Use base path for journal routes
+app.use('/journal', journalRoutes); // Use base path for journal routes
 app.use('/feedback', feedbackRoutes); // Use base path for feedback routes
 app.use('/user', userRoutes);
 

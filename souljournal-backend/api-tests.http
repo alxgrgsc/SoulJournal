@@ -5,7 +5,8 @@ Content-Type: application/json
 {
   "name": "Dylan Doe",
   "feedback": "Really enjoying the journaling feature!",
-  "email": "alex@gmail.com"
+  "email": "alex@gmail.com",
+  "stars": 5
 }
 
 ###
