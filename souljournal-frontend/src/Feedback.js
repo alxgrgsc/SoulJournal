@@ -12,7 +12,7 @@ const Feedback = () => {
   const handleSubmitFeedback = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:3300/api/feedback', {
+      const response = await fetch('http://localhost:3300/feedback/submit-feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, feedback, email }),
