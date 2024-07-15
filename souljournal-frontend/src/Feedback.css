@@ -41,11 +41,9 @@ h1 {
   margin-bottom: 20px;
 }
 
-.star {
-  font-size: 2rem;
-  color: grey;
-  cursor: pointer;
-  transition: color 0.3s;
+.stars {
+  display: flex;
+  gap: 5px;
 }
 
 .star:hover,

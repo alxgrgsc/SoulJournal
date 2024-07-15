@@ -17,7 +17,12 @@ const feedbackSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  stars: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5,
+  },
 });
 
 module.exports = mongoose.model('Feedback', feedbackSchema);
-
