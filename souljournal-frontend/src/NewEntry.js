@@ -20,41 +20,50 @@ const NewEntry = () => {
     }
   };
 
-  const handleSave = () => {
-    // Implement save functionality here
-    console.log('Entry saved:', { title, content });
-    // You can add code to save the entry to a database or state management
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const email = localStorage.getItem('userEmail')
+
+    const response = await fetch('http://localhost:3300/journal/new_entry', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title, content, email }),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      console.log('Entry saved:', result);
+      setTitle('');
+      setContent('');
+    } else {
+      console.error('Failed to save entry');
+    }
   };
 
   return (
-    <div className="new-entry-container">
-      <h1 className="new-entry-title">New Entry</h1>
-      <div className="new-entry-date">Date: {currentDate}</div>
-      <div className="entry-title">
-        <label htmlFor="title">Title:</label>
+    <div className="new-entry">
+      <form onSubmit={handleSubmit}>
+        <div className="current-date">{currentDate}</div>
         <input
           type="text"
-          id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          placeholder="Title"
+          required
         />
-      </div>
-      <div className="new-entry-content">
-        <label htmlFor="content">Content:</label>
         <textarea
-          id="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          rows="10"
-        ></textarea>
-      </div>
-      <div className="new-entry-buttons">
-        <button onClick={handleDiscard}>Discard Entry</button>
-        <button onClick={() => handleNavigation('/home')}>Home</button>
-        <button onClick={() => handleNavigation('/journal')}>Journal</button>
-        <button onClick={() => handleNavigation('/settings')}>Settings</button>
-        <button onClick={handleSave}>Save Entry</button> {/* Added Save Entry button */}
-      </div>
+          placeholder="Content"
+          required
+        />
+        <div className="button-group">
+          <button type="submit" className="save-button">Save Entry</button>
+          <button type="button" className="discard-button" onClick={handleDiscard}>Discard</button>
+        </div>
+      </form>
     </div>
   );
 };
