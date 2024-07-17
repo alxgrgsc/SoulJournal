@@ -1,43 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import './Quotes.css';
+import './Quotes.css'; // Assuming you have a CSS file for styling
 
 const Quotes = () => {
     const [quote, setQuote] = useState('');
     const [author, setAuthor] = useState('');
-
-    const fetchQuote = async () => {
-        try {
-            const response = await fetch('https://api.quotable.io/random');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            setQuote(data.content);
-            setAuthor(data.author);
-        } catch (error) {
-            console.error('There was a problem with your fetch operation:', error);
-            setQuote('Failed to fetch quote. Please try again later.');
-            setAuthor('');
-        }
-    };
+    const [quoteHistory, setQuoteHistory] = useState([]);
+    const [currentQuoteIndex, setCurrentQuoteIndex] = useState(-1);
 
     useEffect(() => {
-      fetchQuote();
-      const quoteContainer = document.querySelector('.quote-container');
-      if (quoteContainer) {
-          quoteContainer.classList.add('loaded');
-      }
-  }, []);
+        fetchQuote();
+    }, []);
 
-    const shareQuote = () => {
-        const shareText = `"${quote}" - ${author}`;
-        if (navigator.share) {
-            navigator.share({
-                title: 'Quote',
-                text: shareText,
-            }).catch(console.error);
+    const fetchQuote = () => {
+        fetch('https://api.quotable.io/random')
+            .then(response => response.json())
+            .then(data => {
+                setQuote(data.content);
+                setAuthor(data.author);
+                setQuoteHistory([...quoteHistory, { text: data.content, author: data.author }]);
+                setCurrentQuoteIndex(currentQuoteIndex + 1);
+            })
+            .catch(console.error);
+    };
+
+    const fetchPreviousQuote = () => {
+        if (currentQuoteIndex > 0) {
+            const previousIndex = currentQuoteIndex - 1;
+            const previousQuote = quoteHistory[previousIndex];
+            setQuote(previousQuote.text);
+            setAuthor(previousQuote.author);
+            setCurrentQuoteIndex(previousIndex);
         } else {
-            alert('Share feature is not supported in your browser.');
+            alert('No previous quotes available.');
         }
     };
 
@@ -50,8 +44,8 @@ const Quotes = () => {
             <div className="quote-text">{quote}</div>
             <div className="quote-author">{author}</div>
             <div className="quote-buttons">
-                <button className="button" onClick={fetchQuote}>Refresh Quote</button>
-                <button className="button" onClick={shareQuote}>Share Quote</button>
+                <button className="button" onClick={fetchQuote}>Next Quote</button>
+                <button className="button" onClick={fetchPreviousQuote}>Previous Quote</button>
             </div>
             <footer className="footer">
                 <button className="button" onClick={() => navigateTo('')}>Home</button>
