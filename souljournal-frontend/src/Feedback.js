@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import './Feedback.css';
 
 const Feedback = () => {
   const [name, setName] = useState('');
@@ -36,7 +37,7 @@ const Feedback = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 feedback-container">
       <h2>Feedback</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmitFeedback}>
@@ -85,12 +86,12 @@ const Feedback = () => {
                 onClick={() => setStars(star)}
                 onMouseEnter={() => setHoverStars(star)}
                 onMouseLeave={() => setHoverStars(stars)}
-                style={{ cursor: 'pointer', fontSize: '1.5rem', color: star <= (hoverStars || stars) ? '#ffc107' : '#e4e5e9' }}
+                style={{ cursor: 'pointer', fontSize: '1.5rem', color: star <= (hoverStars || stars) ? '#485869' : '#e4e5e9' }}
               />
             ))}
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">Submit Feedback</button>
+        <button type="submit" className="btn btn-primary button">Submit Feedback</button>
       </form>
     </div>
   );
