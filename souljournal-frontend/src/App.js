@@ -10,6 +10,8 @@ import Dashboard from './Dashboard';
 import Quotes from './Quotes';
 import SubmitFeedback from './SubmitFeedback';
 import NewEntry from './NewEntry'; // Import the NewEntry component
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function App() {
   return (

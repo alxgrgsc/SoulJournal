@@ -1,35 +1,31 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './NewEntry.css';
 
 const NewEntry = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [mood, setMood] = useState(3); // Default mood is neutral
   const currentDate = new Date().toLocaleDateString();
 
   const handleDiscard = () => {
     if (window.confirm('Your entry will be discarded, are you sure?')) {
       setTitle('');
       setContent('');
-    }
-  };
-
-  const handleNavigation = (path) => {
-    if (window.confirm('Your entry will be discarded, are you sure?')) {
-      // Navigate to the specified path
-      window.location.href = path;
+      setMood(3); // Reset mood to neutral
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const email = localStorage.getItem('userEmail')
+    const email = localStorage.getItem('userEmail');
 
     const response = await fetch('http://localhost:3300/journal/new_entry', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, content, email }),
+      body: JSON.stringify({ title, content, mood, email }),
     });
 
     if (response.ok) {
@@ -37,31 +33,68 @@ const NewEntry = () => {
       console.log('Entry saved:', result);
       setTitle('');
       setContent('');
+      setMood(3); // Reset mood to neutral
     } else {
       console.error('Failed to save entry');
     }
   };
 
   return (
-    <div className="new-entry">
+    <div className="container mt-5">
+      <h1 className="mb-4">New Entry</h1>
       <form onSubmit={handleSubmit}>
-        <div className="current-date">{currentDate}</div>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Title"
-          required
-        />
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Content"
-          required
-        />
+        <div className="mb-3">
+          <label className="form-label">Date</label>
+          <div className="form-control-plaintext">{currentDate}</div>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="title" className="form-label">Title</label>
+          <input
+            type="text"
+            className="form-control"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Title"
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="content" className="form-label">Content</label>
+          <textarea
+            className="form-control"
+            id="content"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Content"
+            required
+            style={{ width: '233px', height: '249px' }}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Mood</label>
+          <div className="d-flex justify-content-between">
+            {[1, 2, 3, 4, 5].map((value) => (
+              <button
+                key={value}
+                type="button"
+                className={`btn ${mood === value ? 'btn-primary' : 'btn-outline-primary'}`}
+                onClick={() => setMood(value)}
+              >
+                <span role="img" aria-label={`mood-${value}`}>
+                  {value === 1 && '😢'}
+                  {value === 2 && '😟'}
+                  {value === 3 && '😐'}
+                  {value === 4 && '🙂'}
+                  {value === 5 && '😄'}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="button-group">
-          <button type="submit" className="save-button">Save Entry</button>
-          <button type="button" className="discard-button" onClick={handleDiscard}>Discard</button>
+          <button type="submit" className="btn btn-primary me-2">Save Entry</button>
+          <button type="button" className="btn btn-secondary" onClick={handleDiscard}>Discard</button>
         </div>
       </form>
     </div>

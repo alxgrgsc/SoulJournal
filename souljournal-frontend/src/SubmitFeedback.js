@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './SubmitFeedback.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const SubmitFeedback = () => {
   const navigate = useNavigate();
@@ -10,10 +10,11 @@ const SubmitFeedback = () => {
   };
 
   return (
-    <div className="submit-feedback-container">
-      <h1>Your feedback has been submitted!</h1>
-      <p>Thank you for your valuable feedback.</p>
-      <button onClick={handleBackToHome}>Back to Home</button>
+    <div className="container mt-5 text-center">
+      <h1 className="mb-4">Your feedback has been submitted!</h1>
+      <button className="btn btn-primary" onClick={handleBackToHome}>
+        Back to Home
+      </button>
     </div>
   );
 };

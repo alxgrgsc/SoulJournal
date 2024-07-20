@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './RegistrationSuccess.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RegistrationSuccess = () => {
   const containerRef = useRef(null);
@@ -12,12 +12,12 @@ const RegistrationSuccess = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="registration-success">
-      <h1>Registration Successful!</h1>
-      <p>Thank you for registering. You can now log in to your account.</p>
-      <Link to="/login">
-        <button className="success-button">Go to Login</button>
-      </Link>
+    <div className="container mt-5" ref={containerRef}>
+      <div className="alert alert-success text-center">
+        <h2>Registration Successful!</h2>
+        <p>Your account has been created successfully.</p>
+        <Link to="/login" className="btn btn-primary mt-3">Go to Login</Link>
+      </div>
     </div>
   );
 };
