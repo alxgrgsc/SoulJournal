@@ -40,7 +40,7 @@ const NewEntry = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container-fluid mt-5">
       <h1 className="mb-4">New Entry</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -73,12 +73,12 @@ const NewEntry = () => {
         </div>
         <div className="mb-3">
           <label className="form-label">Mood</label>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-between mood-category">
             {[1, 2, 3, 4, 5].map((value) => (
               <button
                 key={value}
                 type="button"
-                className={`btn ${mood === value ? 'btn-primary' : 'btn-outline-primary'}`}
+                className={`btn mood-button ${mood === value ? 'checked-mood' : ''}`}
                 onClick={() => setMood(value)}
               >
                 <span role="img" aria-label={`mood-${value}`}>
@@ -93,8 +93,8 @@ const NewEntry = () => {
           </div>
         </div>
         <div className="button-group">
-          <button type="submit" className="btn btn-primary me-2">Save Entry</button>
-          <button type="button" className="btn btn-secondary" onClick={handleDiscard}>Discard</button>
+          <button type="submit" className="btn button me-2 fixed-size-button">Save Entry</button>
+          <button type="button" className="btn button fixed-size-button" onClick={handleDiscard}>Discard</button>
         </div>
       </form>
     </div>

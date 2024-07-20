@@ -25,7 +25,7 @@ const Feedback = () => {
       });
 
       if (response.ok) {
-        navigate('/submit-feedback');
+        navigate('/feedback-success');
       } else {
         const data = await response.json();
         setError(data.message || 'Feedback submission failed');

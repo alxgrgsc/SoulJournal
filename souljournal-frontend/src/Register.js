@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Register.css';
 
 const Register = () => {
   const [firstname, setFirstname] = useState('');
@@ -37,8 +38,8 @@ const Register = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Register</h2>
+    <div className="container mt-5 register-container">
+      <h2 className="register-title">Register</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -96,7 +97,7 @@ const Register = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">Register</button>
+        <button type="submit" className="btn btn-primary register-button">Register</button>
       </form>
     </div>
   );

@@ -1,25 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SoulJournalLogo from './SoulJournalLogo'; // Adjust the import path if necessary
-import './Home.css'; // Ensure you have this CSS file
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Home.css';
+import SoulJournalLogo from './SoulJournalLogo';
 
 function Home() {
   return (
-    <div className="home">
-      <div className="logo-container">
+    <div className="home container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100 text-center">
+      <div className="logo-container mb-4">
         <SoulJournalLogo />
       </div>
-      <p className="tagline">Write, reflect, transform daily.</p>
-      <div className="buttons">
-        <Link to="/register">
-          <button className="button">Register</button>
-        </Link>
-        <Link to="/login">
-          <button className="button">Login</button>
-        </Link>
-        <Link to="/feedback">
-          <button className="button">Feedback</button>
-        </Link>
+      <p className="tagline mb-4">Write, reflect, transform daily.</p>
+      <div className="buttons d-flex justify-content-center w-100">
+        <div className="d-flex flex-grow-1">
+          <Link to="/login" className="w-100 me-3">
+            <button className="btn button btn-primary w-100 fixed-size-button">Login</button>
+          </Link>
+        </div>
+        <div className="d-flex flex-grow-1">
+          <Link to="/register" className="w-100">
+            <button className="btn button btn-secondary w-100 fixed-size-button">Register</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

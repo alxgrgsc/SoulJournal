@@ -48,39 +48,6 @@
   color: #fff;
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .tagline {
-    font-size: 2rem; /* Larger text on tablets and above */
-  }
-
-  .home {
-    padding-top: 15%; /* Slightly more padding on larger screens */
-  }
-
-  .button {
-    font-size: 2rem;;
-  }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .tagline {
-    font-size: 2.5rem; /* Even larger text on desktops */
-  }
-
-  .home {
-    padding-top: 15%; /* Increase padding for desktop */
-  }
-}
-
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .tagline {
-    font-size: 3rem; /* Maximum size for the largest screens */
-  }
-
-  .home {
-    padding-top: 15%; /* Maximum padding for a dramatic effect */
-  }
+.fixed-size-button {
+  min-width: 150px; /* Adjust the width as needed */
 }
