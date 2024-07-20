@@ -68,7 +68,6 @@ const NewEntry = () => {
             onChange={(e) => setContent(e.target.value)}
             placeholder="Content"
             required
-            style={{ width: '233px', height: '249px' }}
           />
         </div>
         <div className="mb-3">

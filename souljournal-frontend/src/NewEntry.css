@@ -40,3 +40,11 @@
   color: #fff; /* White text color */
 }
 
+.mood-button span{
+  filter: grayscale(100%);
+
+}
+
+#content {
+  min-height: 149px;
+}
