@@ -3,7 +3,8 @@ POST http://localhost:3300/feedback/submit-feedback HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "Dylan Doe",
+  "firstname": "Dylan Doe",
+  "lastname": "Georgescu",
   "feedback": "Really enjoying the journaling feature!",
   "email": "alex@gmail.com",
   "stars": 5

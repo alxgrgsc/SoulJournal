@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 
 const feedbackSchema = new mongoose.Schema({
-  name: {
+  firstName: {
     type: String,
-    required: true,
+   
+  },
+  lastName: {
+    type: String,
+
   },
   feedback: {
     type: String,
@@ -19,7 +23,6 @@ const feedbackSchema = new mongoose.Schema({
   },
   stars: {
     type: Number,
-    required: true,
     min: 1,
     max: 5,
   },

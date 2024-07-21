@@ -17,7 +17,7 @@ router.get('/details', async (req, res) => {
     }
 
     // Ensure the field names match what you expect on the client side
-    res.json({ firstName: user.firstname });
+    res.json({ firstName: user.firstname, lastName: user.lastname });
   } catch (error) {
     console.error('Error fetching user details:', error); // Debug log
     res.status(500).json({ message: 'Server error', error });

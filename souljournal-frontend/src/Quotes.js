@@ -48,7 +48,7 @@ const Quotes = () => {
                 <button className="button" onClick={fetchPreviousQuote}>Previous Quote</button>
             </div>
             <footer className="footer">
-                <button className="button" onClick={() => navigateTo('')}>Home</button>
+                <button className="button" onClick={() => navigateTo('dashboard')}>Home</button>
                 <button className="button" onClick={() => navigateTo('journal')}>Journal</button>
                 <button className="button" onClick={() => navigateTo('settings')}>Settings</button>
             </footer>

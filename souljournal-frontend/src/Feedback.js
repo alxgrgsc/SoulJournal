@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import './Feedback.css';
 
 const Feedback = () => {
-  const [name, setName] = useState('');
   const [feedback, setFeedback] = useState('');
-  const [email, setEmail] = useState('');
   const [stars, setStars] = useState(0);
   const [hoverStars, setHoverStars] = useState(0);
   const [error, setError] = useState('');
@@ -15,7 +12,12 @@ const Feedback = () => {
 
   const handleSubmitFeedback = async (event) => {
     event.preventDefault();
-    const feedbackData = { name, feedback, email, stars };
+
+    // Retrieve data from local storage
+    const email = localStorage.getItem('userEmail'); // Retrieve email from local storage
+    const firstName = localStorage.getItem('firstName'); // Retrieve firstname from local storage
+    const lastName = localStorage.getItem('lastName'); // Retrieve lastname from local storage
+    const feedbackData = { firstName, lastName, feedback, email, stars };
     console.log('Submitting feedback:', feedbackData); // Log the feedback data
 
     try {
@@ -26,7 +28,7 @@ const Feedback = () => {
       });
 
       if (response.ok) {
-        navigate('/feedback-success');
+        navigate('/submit-feedback');
       } else {
         const data = await response.json();
         setError(data.message || 'Feedback submission failed');
@@ -38,69 +40,40 @@ const Feedback = () => {
 
   const handleDiscard = () => {
     if (window.confirm('Your feedback will be discarded, are you sure?')) {
-      setStars(0); // Reset stars to default
-      setHoverStars(0); // Reset hover stars to default
-      window.location.href = '/dashboard'; // Redirect to the dashboard
+      setFeedback('');
+      setStars(0);
+      setHoverStars(0);
+      setError('');
     }
   };
 
   return (
-    <div className="container mt-5 feedback-container">
+    <div className="feedback">
       <h2>Feedback</h2>
-      {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmitFeedback}>
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="feedback" className="form-label">Feedback</label>
+          <label className="form-label">Feedback</label>
           <textarea
             className="form-control"
-            id="feedback"
-            placeholder="Your feedback"
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
-            required
           />
         </div>
-        <div className="mb-3">
-          <label className="form-label">Rating</label>
-          <div>
-            {[1, 2, 3, 4, 5].map((star) => (
-              <span
-                key={star}
-                className={`fa fa-star ${star <= (hoverStars || stars) ? 'checked' : ''}`}
-                onClick={() => setStars(star)}
-                onMouseEnter={() => setHoverStars(star)}
-                onMouseLeave={() => setHoverStars(stars)}
-                style={{ cursor: 'pointer', fontSize: '1.5rem', color: star <= (hoverStars || stars) ? '#485869' : '#e4e5e9' }}
-              />
-            ))}
-          </div>
+        <div className="star-rating">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <i
+              key={star}
+              className={`fa fa-star ${star <= (hoverStars || stars) ? 'checked' : ''}`}
+              onClick={() => setStars(star)}
+              onMouseEnter={() => setHoverStars(star)}
+              onMouseLeave={() => setHoverStars(stars)}
+              style={{ cursor: 'pointer', fontSize: '1.5rem', color: star <= (hoverStars || stars) ? '#485869' : '#e4e5e9' }}
+            />
+          ))}
         </div>
+        {error && <div className="alert alert-danger">{error}</div>}
         <button type="submit" className="btn btn-primary button">Submit Feedback</button>
-        <button type="submit" className="btn btn-primary button" onClick = {handleDiscard}>Discard Feedback</button>
+        <button type="button" className="btn btn-secondary button" onClick={handleDiscard}>Discard Feedback</button>
       </form>
     </div>
   );
