@@ -36,6 +36,14 @@ const Feedback = () => {
     }
   };
 
+  const handleDiscard = () => {
+    if (window.confirm('Your feedback will be discarded, are you sure?')) {
+      setStars(0); // Reset stars to default
+      setHoverStars(0); // Reset hover stars to default
+      window.location.href = '/dashboard'; // Redirect to the dashboard
+    }
+  };
+
   return (
     <div className="container mt-5 feedback-container">
       <h2>Feedback</h2>
@@ -92,6 +100,7 @@ const Feedback = () => {
           </div>
         </div>
         <button type="submit" className="btn btn-primary button">Submit Feedback</button>
+        <button type="submit" className="btn btn-primary button" onClick = {handleDiscard}>Discard Feedback</button>
       </form>
     </div>
   );
