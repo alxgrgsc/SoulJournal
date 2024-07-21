@@ -1,16 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './SubmitFeedback.css';
 
 const SubmitFeedback = () => {
   const navigate = useNavigate();
 
   const handleBackToHome = () => {
-    navigate('/');
+    navigate('/dashboard');
   };
 
   return (
-    <div className="container mt-5 text-center">
+    <div className="container submit-feedback-container mt-5 text-center">
       <h1 className="mb-4">Your feedback has been submitted!</h1>
       <button className="btn btn-primary" onClick={handleBackToHome}>
         Back to Home

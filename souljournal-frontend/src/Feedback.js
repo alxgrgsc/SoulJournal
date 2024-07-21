@@ -44,6 +44,7 @@ const Feedback = () => {
       setStars(0);
       setHoverStars(0);
       setError('');
+      navigate("/dashboard");
     }
   };
 
@@ -52,7 +53,7 @@ const Feedback = () => {
       <h2>Feedback</h2>
       <form onSubmit={handleSubmitFeedback}>
         <div className="mb-3">
-          <label className="form-label">Feedback</label>
+          <label className="form-label">Content</label>
           <textarea
             className="form-control"
             value={feedback}
@@ -60,6 +61,7 @@ const Feedback = () => {
           />
         </div>
         <div className="star-rating">
+        <label className="form-label">Stars</label>
           {[1, 2, 3, 4, 5].map((star) => (
             <i
               key={star}
@@ -72,6 +74,7 @@ const Feedback = () => {
           ))}
         </div>
         {error && <div className="alert alert-danger">{error}</div>}
+        
         <button type="submit" className="btn btn-primary button">Submit Feedback</button>
         <button type="button" className="btn btn-secondary button" onClick={handleDiscard}>Discard Feedback</button>
       </form>

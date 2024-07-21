@@ -43,7 +43,7 @@ const Dashboard = () => {
   return (
     <div className="container-fluid d-flex align-items-center justify-content-center min-vh-100">
       <div className="row w-100 justify-content-center text-center">
-        <h1 className="mb-4">Welcome back, {firstName} {lastName}!</h1>
+        <h1 className="mb-4">Welcome back, {firstName}!</h1>
         <div className="col-12 col-md-6 mb-3">
           <Link to="/create-entry" className="btn btn-primary w-100 fs-5 fs-lg-4 dashboard-button">Create Entry</Link>
         </div>
