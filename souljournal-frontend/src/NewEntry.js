@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NewEntry.css';
 
@@ -7,12 +8,14 @@ const NewEntry = () => {
   const [content, setContent] = useState('');
   const [mood, setMood] = useState(3); // Default mood is neutral
   const currentDate = new Date().toLocaleDateString();
+  const navigate = useNavigate();
 
   const handleDiscard = () => {
     if (window.confirm('Your entry will be discarded, are you sure?')) {
       setTitle('');
       setContent('');
       setMood(3); // Reset mood to neutral
+      navigate(-1);
     }
   };
 
