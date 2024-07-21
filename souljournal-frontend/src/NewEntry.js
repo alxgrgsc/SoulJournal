@@ -36,7 +36,8 @@ const NewEntry = () => {
       console.log('Entry saved:', result);
       setTitle('');
       setContent('');
-      setMood(3); // Reset mood to neutral
+      setMood(3);
+      navigate('/submit-entry');
     } else {
       console.error('Failed to save entry');
     }

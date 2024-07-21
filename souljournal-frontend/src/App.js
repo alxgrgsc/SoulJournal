@@ -9,7 +9,8 @@ import RegistrationSuccess from './RegistrationSuccess';
 import Dashboard from './Dashboard';
 import Quotes from './Quotes';
 import SubmitFeedback from './SubmitFeedback';
-import NewEntry from './NewEntry'; // Import the NewEntry component
+import NewEntry from './NewEntry';
+import SubmitEntry from './SubmitEntry'; // Import the new component
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -28,7 +29,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/quotes" element={<Quotes />} />
             <Route path="/submit-feedback" element={<SubmitFeedback />} />
-            <Route path="/new-entry" element={<NewEntry />} /> {/* Add the new route */}
+            <Route path="/new-entry" element={<NewEntry />} /> 
+            <Route path="/submit-entry" element={<SubmitEntry />} /> {/* Add the new route */}
           </Routes>
         </header>
       </div>

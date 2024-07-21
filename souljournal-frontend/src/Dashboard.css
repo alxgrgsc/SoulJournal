@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
 
-body{
+body {
   background-color: rgba(87, 85, 85, 0.097);
+  opacity: 0;
+  transform: translateY(50px);
+  animation: slideDown 0.5s forwards;
 }
 
 .dashboard-title {
@@ -11,8 +14,6 @@ body{
   font-weight: bold;
   color: #555;
 }
-
-
 
 .dashboard-button {
   padding: 10px 20px;
@@ -27,10 +28,23 @@ body{
   border-radius: 5px;
   text-decoration: none;
   margin-top: 10px;
+
 }
 
 .dashboard-button:hover {
   background-color: #485869;
   color: #fff;
+}
+
+/* SlideDown effect */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 

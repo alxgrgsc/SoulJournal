@@ -1,0 +1,58 @@
+/* SubmitFeedback.css */
+
+.submit-feedback-container {
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: slideDown 0.5s forwards;
+}
+
+@keyframes slideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.submit-feedback-container.show {
+  animation: slideDown 1s forwards;
+}
+
+.submit-feedback-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.submit-feedback-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.submit-feedback-form label {
+  font-family: 'Nunito', sans-serif;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+
+
+.submit-feedback-container button {
+  font-family: 'Nunito', sans-serif;
+  padding: 10px;
+  background-color: white;
+  color: #485869;
+  border: 1px solid #485869;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.submit-feedback-container button:hover {
+  background-color: #485869;
+  color: white;
+}
