@@ -1,17 +1,35 @@
 /* SubmitFeedback.css */
+body{
+  opacity: 0;
+  transform: translateY(100px);
+  animation: slideDown 1s forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 .submit-feedback-container {
   padding: 20px;
   border-radius: 8px;
   width: 100%;
   max-width: 400px;
-  opacity: 0;
-  transform: translateY(-50px);
-  animation: slideDown 0.5s forwards;
 }
 
 @keyframes slideDown {
-  to {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0);
   }

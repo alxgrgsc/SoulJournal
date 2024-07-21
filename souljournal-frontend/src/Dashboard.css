@@ -4,15 +4,20 @@ body {
   background-color: rgba(87, 85, 85, 0.097);
   opacity: 0;
   transform: translateY(50px);
-  animation: slideDown 0.5s forwards;
+  animation: slideDown 2s forwards;
 }
 
 .dashboard-title {
   font-size: 2em;
   margin-bottom: 20px;
+  width: 90%;
   font-style: italic;
   font-weight: bold;
   color: #555;
+}
+
+h1{
+  padding: 10px;
 }
 
 .dashboard-button {
