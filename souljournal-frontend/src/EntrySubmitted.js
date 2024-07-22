@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './SubmitEntry.css';
+import './EntrySubmitted.css';
 
-const SubmitFeedback = () => {
+const EntrySubmitted = () => {
   const navigate = useNavigate();
 
   const handleBackToHome = () => {
@@ -20,4 +20,4 @@ const SubmitFeedback = () => {
   );
 };
 
-export default SubmitFeedback;
+export default EntrySubmitted;
