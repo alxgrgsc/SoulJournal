@@ -1,5 +1,7 @@
+//imports
 const mongoose = require('mongoose');
 
+//schema for feedback 
 const feedbackSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -28,4 +30,5 @@ const feedbackSchema = new mongoose.Schema({
   },
 });
 
+//export model
 module.exports = mongoose.model('Feedback', feedbackSchema);

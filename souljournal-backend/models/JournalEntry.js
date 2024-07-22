@@ -1,5 +1,7 @@
+//import 
 const mongoose = require('mongoose');
 
+//schema for journal entry
 const journalEntrySchema = new mongoose.Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
@@ -11,10 +13,11 @@ const journalEntrySchema = new mongoose.Schema({
     max: 5,
   } 
 }, {
-  timestamps: true, // Automatically adds createdAt and updatedAt fields
-  collection: 'journal_entries' // Explicitly specify the collection name
+  timestamps: true, 
+  collection: 'journal_entries' 
 });
 
-const JournalEntry = mongoose.model('JournalEntry', journalEntrySchema);
 
-module.exports = JournalEntry;
+
+//export model 
+module.exports = mongoose.model('JournalEntry', journalEntrySchema);

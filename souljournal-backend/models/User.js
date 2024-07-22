@@ -1,6 +1,9 @@
+//import modules 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+
+//schema for user 
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -21,7 +24,7 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// Hash the password before saving the user
+//hash password before saving 
 userSchema.pre('save', async function(next) {
   if (this.isModified('password')) {
     try {
@@ -33,6 +36,5 @@ userSchema.pre('save', async function(next) {
   next();
 });
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+//export model
+module.exports = mongoose.model('User', userSchema);
