@@ -1,12 +1,13 @@
+//initialize the router and import the JournalEntry model
 const express = require('express');
-const JournalEntry = require('../models/JournalEntry'); // Adjust the path as necessary
-
+const JournalEntry = require('../models/JournalEntry');
 const router = express.Router();
 
-// Middleware for error handling in async routes
+//define async handler
 const asyncHandler = fn => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
+//routes for journal entries
 router.post('/new_entry', asyncHandler(async (req, res) => {
   const entry = new JournalEntry(req.body);
   await entry.save();
@@ -45,4 +46,5 @@ router.route('/entries/:id')
     }
   }));
 
+//export router 
 module.exports = router;

@@ -1,17 +1,19 @@
+//imports 
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Dashboard.css';
 
+//dashboard component 
 const Dashboard = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
   useEffect(() => {
-    // Retrieve the email from localStorage
+    //get user email from local storage 
     const email = localStorage.getItem('userEmail');
 
-    // Fetch user details from the backend
+    //fetch user details
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(`http://localhost:3300/user/details?email=${email}`);
@@ -21,21 +23,21 @@ const Dashboard = () => {
         setFirstName(data.firstName);
         setLastName(data.lastName);
 
-        // Save firstName and lastName to localStorage
+        //save firstname and lastname to local storage 
         localStorage.setItem('firstName', data.firstName);
         localStorage.setItem('lastName', data.lastName);
       } catch (error) {
         console.error('Error fetching user details:', error);
       }
     };
-
+    
+    //check if email is present
     if (email) {
       fetchUserDetails();
     }
   }, []);
 
   useEffect(() => {
-    // Log the state values to verify they are being set correctly
     console.log('First Name:', firstName);
     console.log('Last Name:', lastName);
   }, [firstName, lastName]);
@@ -64,4 +66,5 @@ const Dashboard = () => {
   );
 };
 
+//export dashboard component
 export default Dashboard;

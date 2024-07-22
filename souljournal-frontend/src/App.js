@@ -1,3 +1,4 @@
+//imports 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
@@ -14,6 +15,7 @@ import EntrySubmitted from './EntrySubmitted'; // Import the new component
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
+//app component 
 function App() {
   return (
     <Router>
@@ -38,4 +40,5 @@ function App() {
   );
 }
 
+//export app component
 export default App;
