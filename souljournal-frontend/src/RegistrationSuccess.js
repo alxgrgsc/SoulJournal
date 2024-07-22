@@ -12,11 +12,11 @@ const RegistrationSuccess = () => {
   }, []);
 
   return (
-    <div className="container mt-5" ref={containerRef}>
-      <div className="alert alert-success text-center">
+    <div className="container mt-5 registration-success" ref={containerRef}>
+      <div className="text-center">
         <h2>Registration Successful!</h2>
         <p>Your account has been created successfully.</p>
-        <Link to="/login" className="btn btn-primary mt-3">Go to Login</Link>
+        <Link to="/login" className="btn button mt-3">Go to Login</Link>
       </div>
     </div>
   );

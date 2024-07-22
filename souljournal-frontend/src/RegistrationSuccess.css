@@ -32,7 +32,7 @@
   color: #485869;
 }
 
-.success-button {
+.button {
   background-color: white;
   color: #485869;
   padding: 10px 20px;
@@ -43,7 +43,7 @@
   transition: background-color 0.3s;
 }
 
-.success-button:hover {
+button:hover {
   background-color: #485869;
   color: white;
 }
