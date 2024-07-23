@@ -1,8 +1,10 @@
+//imports 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Feedback.css';
 
+//feedback component
 const Feedback = () => {
   const [feedback, setFeedback] = useState('');
   const [stars, setStars] = useState(0);
@@ -10,16 +12,20 @@ const Feedback = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  //handle submit feedback
   const handleSubmitFeedback = async (event) => {
     event.preventDefault();
 
-    // Retrieve data from local storage
-    const email = localStorage.getItem('userEmail'); // Retrieve email from local storage
-    const firstName = localStorage.getItem('firstName'); // Retrieve firstname from local storage
-    const lastName = localStorage.getItem('lastName'); // Retrieve lastname from local storage
+    //retrieve data from local storage
+    const email = localStorage.getItem('userEmail');
+    const firstName = localStorage.getItem('firstName');
+    const lastName = localStorage.getItem('lastName'); 
     const feedbackData = { firstName, lastName, feedback, email, stars };
-    console.log('Submitting feedback:', feedbackData); // Log the feedback data
+    
+    //log feedback data
+    console.log('Submitting feedback:', feedbackData); 
 
+    //fetch feedback data
     try {
       const response = await fetch('http://localhost:3300/feedback/submit-feedback', {
         method: 'POST',
@@ -27,6 +33,7 @@ const Feedback = () => {
         body: JSON.stringify(feedbackData),
       });
 
+      //check if response is ok
       if (response.ok) {
         navigate('/submit-feedback');
       } else {
@@ -38,6 +45,7 @@ const Feedback = () => {
     }
   };
 
+  //handle discard feedback
   const handleDiscard = () => {
     if (window.confirm('Your feedback will be discarded, are you sure?')) {
       setFeedback('');
@@ -75,11 +83,12 @@ const Feedback = () => {
         </div>
         {error && <div className="alert alert-danger">{error}</div>}
         
-        <button type="submit" className="btn btn-primary button">Submit Feedback</button>
-        <button type="button" className="btn btn-secondary button" onClick={handleDiscard}>Discard Feedback</button>
+        <button type="submit" className="btn button">Submit Feedback</button>
+        <button type="button" className="btn button" onClick={handleDiscard}>Discard Feedback</button>
       </form>
     </div>
   );
 };
 
+//export feedback component
 export default Feedback;

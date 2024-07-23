@@ -47,19 +47,19 @@ const Dashboard = () => {
       <div className="row w-100 justify-content-center text-center">
         <h1 className="mb-4">Welcome back, {firstName}!</h1>
         <div className="col-12 col-md-6 mb-3">
-          <Link to="/new-entry" className="btn btn-primary w-100 fs-5 fs-lg-4 dashboard-button">Create Entry</Link>
+          <Link to="/new-entry" className="btn w-100 fs-5 fs-lg-4 dashboard-button">Create Entry</Link>
         </div>
         <div className="col-12 col-md-6 mb-3">
-          <Link to="/manage-entries" className="btn btn-primary w-100 fs-5 fs-lg-4 dashboard-button">Manage Entries</Link>
+          <Link to="/manage-entries" className="btn w-100 fs-5 fs-lg-4 dashboard-button">Manage Entries</Link>
         </div>
         <div className="col-12 col-md-6 mb-3">
-          <Link to="/quotes" className="btn btn-primary w-100 fs-5 fs-lg-4 dashboard-button">Quotes</Link>
+          <Link to="/quotes" className="btn w-100 fs-5 fs-lg-4 dashboard-button">Quotes</Link>
         </div>
         <div className="col-12 col-md-6 mb-3">
-          <Link to="/settings" className="btn btn-primary w-100 fs-5 fs-lg-4 dashboard-button">Settings</Link>
+          <Link to="/settings" className="btn w-100 fs-5 fs-lg-4 dashboard-button">Settings</Link>
         </div>
         <div className="col-12 col-md-6 mb-3">
-          <Link to="/feedback" className="btn btn-primary w-100 fs-5 fs-lg-4 dashboard-button">Feedback</Link>
+          <Link to="/feedback" className="btn w-100 fs-5 fs-lg-4 dashboard-button">Feedback</Link>
         </div>
       </div>
     </div>
