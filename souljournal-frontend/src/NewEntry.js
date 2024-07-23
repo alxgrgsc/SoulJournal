@@ -1,8 +1,10 @@
+//imports 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NewEntry.css';
 
+//NewEntry component
 const NewEntry = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -10,15 +12,17 @@ const NewEntry = () => {
   const currentDate = new Date().toLocaleDateString();
   const navigate = useNavigate();
 
+  //handle discard
   const handleDiscard = () => {
     if (window.confirm('Your entry will be discarded, are you sure?')) {
       setTitle('');
       setContent('');
       setMood(3); // Reset mood to neutral
-      navigate(-1);
+      navigate('/dashboard');
     }
   };
 
+  //handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     const email = localStorage.getItem('userEmail');
@@ -96,7 +100,7 @@ const NewEntry = () => {
           </div>
         </div>
         <div className="button-group">
-          <button type="submit" className="btn button me-2 fixed-size-button">Save Entry</button>
+          <button type="submit" className="btn button fixed-size-button">Save Entry</button>
           <button type="button" className="btn button fixed-size-button" onClick={handleDiscard}>Discard</button>
         </div>
       </form>
@@ -104,4 +108,5 @@ const NewEntry = () => {
   );
 };
 
+//export
 export default NewEntry;

@@ -68,6 +68,8 @@ const Feedback = () => {
             onChange={(e) => setFeedback(e.target.value)}
           />
         </div>
+
+        {/* star rating */}
         <div className="star-rating">
         <label className="form-label">Stars</label>
           {[1, 2, 3, 4, 5].map((star) => (

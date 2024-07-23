@@ -1,3 +1,4 @@
+//imports 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,6 +33,13 @@ const Login = () => {
     }
   };
 
+    //handle discard feedback
+    const handleDiscard = () => {
+      if (window.confirm('You will return to the welcome page, are you sure?')) {
+        navigate("/welcome-page");
+      }
+    };
+
   return (
     <div className=" show container mt-5 login-container">
       <h2>Login</h2>
@@ -61,7 +69,10 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary login-button">Login</button>
+        <div className="buttons d-flex justify-content-center w-100">
+          <button type='submit' className="btn button  w-100 fixed-size-button">Login</button>
+          <button className="btn button  w-100 fixed-size-button" onClick={handleDiscard}>Back</button>
+        </div>
       </form>
     </div>
   );

@@ -1,16 +1,20 @@
+//imports
 import React, { useState, useEffect } from 'react';
-import './Quotes.css'; // Assuming you have a CSS file for styling
+import './Quotes.css'; 
 
+//quotes component
 const Quotes = () => {
     const [quote, setQuote] = useState('');
     const [author, setAuthor] = useState('');
     const [quoteHistory, setQuoteHistory] = useState([]);
     const [currentQuoteIndex, setCurrentQuoteIndex] = useState(-1);
 
+
     useEffect(() => {
         fetchQuote();
     }, []);
 
+    //fetch quote
     const fetchQuote = () => {
         fetch('https://api.quotable.io/random')
             .then(response => response.json())
@@ -23,6 +27,7 @@ const Quotes = () => {
             .catch(console.error);
     };
 
+    //fetch previous quote
     const fetchPreviousQuote = () => {
         if (currentQuoteIndex > 0) {
             const previousIndex = currentQuoteIndex - 1;
@@ -35,6 +40,7 @@ const Quotes = () => {
         }
     };
 
+    //navigate to page
     const navigateTo = (page) => {
         window.location.href = `/${page}`;
     };
@@ -56,4 +62,5 @@ const Quotes = () => {
     );
 };
 
+//export
 export default Quotes;

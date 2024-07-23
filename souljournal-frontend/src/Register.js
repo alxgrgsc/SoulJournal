@@ -37,6 +37,13 @@ const Register = () => {
     }
   };
 
+  //handle discard feedback
+  const handleDiscard = () => {
+    if (window.confirm('You will return to the welcome page, are you sure?')) {
+      navigate("/welcome-page");
+    }
+  };
+
   return (
     <div className="container mt-5 register-container">
       <h2 className="register-title">Register</h2>
@@ -97,7 +104,11 @@ const Register = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary register-button">Register</button>
+        <div className="buttons d-flex justify-content-center w-100">
+        <button className="btn button  w-100 fixed-size-button" onClick={handleDiscard}>Back</button>
+        <button type="submit" className="btn button fixed-size-button">Register</button>
+
+        </div>
       </form>
     </div>
   );

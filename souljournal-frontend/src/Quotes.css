@@ -53,28 +53,3 @@ body {
   margin-bottom: 20px;
 }
 
-.button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  border: 1px solid #485869;
-  background-color: white;
-  color: #485869;
-  transition: background-color 0.3s ease;
-  border-radius: 5px;
-}
-
-.button:hover {
-  background-color: #485869;
-  color: #fff;
-}
-
-.footer {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px 0;
-  width: 100%;
-  background-color: #f1f1f1;
-}

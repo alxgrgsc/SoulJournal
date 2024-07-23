@@ -1,7 +1,7 @@
 //imports 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './Home';
+import WelcomePage from './WelcomePage';
 import Register from './Register';
 import Login from './Login';
 import ForgotPassword from './ForgotPassword';
@@ -22,7 +22,7 @@ function App() {
       <div className="App">
         <header className="App-header">
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/" element={<WelcomePage />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -30,7 +30,7 @@ function App() {
             <Route path="/registration-success" element={<RegistrationSuccess />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/quotes" element={<Quotes />} />
-            <Route path="/submit-feedback" element={<FeedbackSubmitted />} />
+            <Route path="/feedback-submitted" element={<FeedbackSubmitted />} />
             <Route path="/new-entry" element={<NewEntry />} /> 
             <Route path="/entry-submitted" element={<EntrySubmitted />} /> {/* Add the new route */}
           </Routes>

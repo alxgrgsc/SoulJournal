@@ -9,15 +9,6 @@ body {
   animation: slideDown 2s forwards;
 }
 
-.dashboard-title {
-  font-size: 2em;
-  margin-bottom: 20px;
-  width: 90%;
-  font-style: italic;
-  font-weight: bold;
-  color: #555;
-}
-
 h1{
   padding: 10px;
 }
@@ -43,15 +34,4 @@ h1{
   color: #fff;
 }
 
-/*slidedown effect */
-@keyframes slideDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 

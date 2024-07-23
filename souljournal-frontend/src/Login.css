@@ -2,15 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
 
 /* Base styles */
-.login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
-  text-align: center;
-  padding: 20px;
-}
+
 
 .login-container {
   padding: 40px;
@@ -20,61 +12,6 @@
   opacity: 0;
   transform: translateY(-50px);
   animation: slideDown 0.5s forwards;
-}
-
-@keyframes slideDown {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.login-container.show {
-  animation: slideDown 1s forwards;
-}
-
-.login-title {
-  font-family: 'Nunito', sans-serif;
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.login-input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-
-
-.login-links {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  width: 100%; /* Ensure the container takes full width */
-}
-
-.login-link {
-  color: #485869;
-  text-decoration: none;
-  font-size: 1rem;
-  padding: 10px 20px;
-  border: 1px solid #485869;
-  border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.login-link:hover {
-  background-color: #485869;
-  color: #fff;
 }
 
 .login-button {
@@ -92,20 +29,13 @@
   color: white;
 }
 
-.forgot-password-linked {
-  align-self: flex-start;
-  margin-bottom: 10px;
-  color: #485869;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: background-color 0.3s, color 0.3s;
-  border: none ; /* Ensure no border is applied */
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 }
 
-.forgot-password-linked:hover {
-  color: #48586962;
-}
-
-.forgot-password-linked, .login-button, login-link{
-  transition: background-color 0.3s, color 0.3s;
+.fixed-size-button {
+  min-width: 150px; 
 }
