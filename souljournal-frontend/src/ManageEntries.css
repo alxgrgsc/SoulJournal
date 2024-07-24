@@ -6,3 +6,7 @@
   background-color: #485869;
   color: white;
 }
+
+.content-textarea{
+  min-height: 145px !important;
+}

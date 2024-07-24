@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import './ManageEntries.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './ManageEntries.css';
 
 const ManageEntries = () => {
   const [entries, setEntries] = useState([]);
   const [selectedEntry, setSelectedEntry] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [isEditing, setIsEditing] = useState(false); // New state for edit mode
-  const [editableContent, setEditableContent] = useState(""); // New state for editable content
+  const [isEditing, setIsEditing] = useState(false);
+  const [editableContent, setEditableContent] = useState("");
+  const [editableTitle, setEditableTitle] = useState("");
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -35,53 +36,43 @@ const ManageEntries = () => {
   }
 
   const handleEntryClick = (entry) => {
-    setSelectedEntry(entry); // This should already be doing what's needed
+    setSelectedEntry(entry);
     setEditableContent(entry.content);
+    setEditableTitle(entry.title);
     setShowModal(true);
-    setIsEditing(false);
-  };
-
-  const handleEdit = () => {
-    setIsEditing(true); // Switch to edit mode
+    setIsEditing(false); // Change this to false so the modal opens in read-only mode
   };
 
   const handleSave = async () => {
-    const entryId = selectedEntry._id; // Assuming selectedEntry is stored in state and has the _id property
-    console.log('Saving entry with ID:', entryId);
-    const updateUrl = `http://localhost:3300/journal/entries/${entryId}`; // Update with your actual API endpoint
-  
+    if (!selectedEntry) return;
+    const updateUrl = `http://localhost:3300/journal/entries/${selectedEntry._id}`;
+
     try {
       const response = await fetch(updateUrl, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content: editableContent }), // Update this based on your backend's expected format
+        body: JSON.stringify({ title: editableTitle, content: editableContent }),
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to update entry');
       }
-  
+
       const updatedEntry = await response.json();
-      // Update local state with the updated entry
-      const updatedEntries = entries.map(entry => 
-        entry._id === updatedEntry._id ? updatedEntry : entry
+      const updatedEntries = entries.map(entry =>
+        entry._id === updatedEntry._id ? { ...entry, title: updatedEntry.title, content: updatedEntry.content } : entry
       );
       setEntries(updatedEntries);
-  
-      console.log('Entry updated successfully');
+      setShowModal(false);
     } catch (error) {
       console.error('Error updating entry:', error);
     }
-  
-    setIsEditing(false);
-    setShowModal(false);
   };
 
   const handleClose = () => {
     setShowModal(false);
-    setIsEditing(false); // Reset edit mode
   };
 
   return (
@@ -100,12 +91,23 @@ const ManageEntries = () => {
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{selectedEntry?.title}</Modal.Title>
+          <Modal.Title>
+            {isEditing ? (
+              <input
+                type="text"
+                className="form-control"
+                value={editableTitle}
+                onChange={(e) => setEditableTitle(e.target.value)}
+              />
+            ) : (
+              selectedEntry?.title
+            )}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {isEditing ? (
             <textarea
-              className="form-control"
+              className="form-control content-textarea"
               value={editableContent}
               onChange={(e) => setEditableContent(e.target.value)}
             />
@@ -114,15 +116,18 @@ const ManageEntries = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          {isEditing ? (
-            <Button variant="primary" onClick={handleSave}>Save</Button>
-          ) : (
-            <>
-              <Button variant="secondary" onClick={handleClose}>Close</Button>
-              <Button variant="primary" onClick={handleEdit}>Edit</Button>
-            </>
-          )}
-        </Modal.Footer>
+  {isEditing ? (
+    <>
+      <Button variant="primary" onClick={handleSave}>Save</Button>
+      <Button variant="secondary" onClick={() => setIsEditing(false)}>Cancel</Button>
+    </>
+  ) : (
+    <>
+      <Button variant="primary" onClick={() => setIsEditing(true)}>Edit</Button>
+      <Button variant="secondary" onClick={handleClose}>Close</Button>
+    </>
+  )}
+</Modal.Footer>
       </Modal>
     </div>
   );
