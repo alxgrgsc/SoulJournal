@@ -36,7 +36,7 @@ const Login = () => {
     //handle discard feedback
     const handleDiscard = () => {
       if (window.confirm('You will return to the welcome page, are you sure?')) {
-        navigate("/welcome-page");
+        navigate("/");
       }
     };
 

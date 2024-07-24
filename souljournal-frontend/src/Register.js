@@ -1,8 +1,10 @@
+//imports
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Register.css';
 
+//register component
 const Register = () => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -12,6 +14,7 @@ const Register = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  //handle submit feedback
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== repeatPassword) {
@@ -40,7 +43,7 @@ const Register = () => {
   //handle discard feedback
   const handleDiscard = () => {
     if (window.confirm('You will return to the welcome page, are you sure?')) {
-      navigate("/welcome-page");
+      navigate("/");
     }
   };
 
@@ -114,4 +117,5 @@ const Register = () => {
   );
 };
 
+//export register component
 export default Register;

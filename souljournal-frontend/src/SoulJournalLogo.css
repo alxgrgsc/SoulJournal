@@ -1,5 +1,4 @@
-/* src/SoulJournalLogo.css */
-
+/* font import  */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
 
 .logo {
@@ -16,7 +15,7 @@
   display: flex;
   align-items: center;
   letter-spacing: 4px;
-  position: relative; /* Added to establish a positioning context */
+  position: relative;
 }
 
 @keyframes slideInThenOut {
@@ -37,17 +36,15 @@
 .logo-text::after {
   content: '';
   position: absolute;
-  height: 4px; /* Height of the bar */
-  background-color: #000000; /* Light orange color */
-  top: -10px; /* Position the bar above the text */
+  height: 4px; 
+  background-color: #000000; 
+  top: -10px;
   left: 0;
-  width: 0%; /* Initial width */
-  opacity: 1; /* Ensure the bar is fully visible when it appears */
-  animation-fill-mode: forwards; /* Keep the last keyframe state */
-  animation: slideInThenOut 1.5s ease-in-out; /* Apply the animation */
+  width: 0%; 
+  opacity: 1; 
+  animation-fill-mode: forwards; 
+  animation: slideInThenOut 1.5s ease-in-out;
 }
-
-
 
 .logo-part {
   margin: 0 5px;

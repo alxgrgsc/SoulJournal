@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './WelcomePage.css';
 import SoulJournalLogo from './SoulJournalLogo';
 
-//WelcomePage component
+//welcomePage component
 function WelcomePage() {
   return (
     <div className="home container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100 text-center">
@@ -29,4 +29,5 @@ function WelcomePage() {
   );
 }
 
+//export welcome page component
 export default WelcomePage;

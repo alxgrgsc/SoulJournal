@@ -1,18 +1,12 @@
-import React, { useRef, useEffect } from 'react';
+//imports 
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+//registration success component
 const RegistrationSuccess = () => {
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.classList.add('show');
-    }
-  }, []);
 
   return (
-    <div className="container mt-5 registration-success" ref={containerRef}>
+    <div className="container mt-5 registration-success" >
       <div className="text-center">
         <h2>Registration Successful!</h2>
         <p>Your account has been created successfully.</p>
@@ -22,4 +16,5 @@ const RegistrationSuccess = () => {
   );
 };
 
+//export registration success component
 export default RegistrationSuccess;

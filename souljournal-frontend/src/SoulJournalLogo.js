@@ -1,3 +1,4 @@
+//imports 
 import React from 'react';
 import './SoulJournalLogo.css'; // Ensure you have this CSS file
 

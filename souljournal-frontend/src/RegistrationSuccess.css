@@ -1,49 +1,4 @@
-.registration-success {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
-  padding: 10px;
-  background-color: #f4f4f4;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(-20px); /* Initial state for slide down */
-  transition: opacity 0.5s, transform 0.5s; /* Ensure smooth transition */
-}
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px); /* Initial state for slide down */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-.registration-success.show {
-  opacity: 1;
-  transform: translateY(0);
-}
 
-.registration-success h1 {
-  color: #485869;
-}
 
-.button {
-  background-color: white;
-  color: #485869;
-  padding: 10px 20px;
-  border: solid 1px #485869;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #485869;
-  color: white;
-}
