@@ -35,20 +35,46 @@ const ManageEntries = () => {
   }
 
   const handleEntryClick = (entry) => {
-    setSelectedEntry(entry);
-    setEditableContent(entry.content); // Initialize editable content
+    setSelectedEntry(entry); // This should already be doing what's needed
+    setEditableContent(entry.content);
     setShowModal(true);
-    setIsEditing(false); // Start in view mode
+    setIsEditing(false);
   };
 
   const handleEdit = () => {
     setIsEditing(true); // Switch to edit mode
   };
 
-  const handleSave = () => {
-    // Implement save logic here, possibly updating the entry in the backend
-    console.log('Saving', editableContent);
-    // After saving, you might want to update the entry in the local state as well
+  const handleSave = async () => {
+    const entryId = selectedEntry._id; // Assuming selectedEntry is stored in state and has the _id property
+    console.log('Saving entry with ID:', entryId);
+    const updateUrl = `http://localhost:3300/journal/entries/${entryId}`; // Update with your actual API endpoint
+  
+    try {
+      const response = await fetch(updateUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content: editableContent }), // Update this based on your backend's expected format
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update entry');
+      }
+  
+      const updatedEntry = await response.json();
+      // Update local state with the updated entry
+      const updatedEntries = entries.map(entry => 
+        entry._id === updatedEntry._id ? updatedEntry : entry
+      );
+      setEntries(updatedEntries);
+  
+      console.log('Entry updated successfully');
+    } catch (error) {
+      console.error('Error updating entry:', error);
+    }
+  
     setIsEditing(false);
     setShowModal(false);
   };
