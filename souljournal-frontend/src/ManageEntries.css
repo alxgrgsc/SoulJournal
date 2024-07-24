@@ -1,0 +1,8 @@
+.entry-card{
+  transition: background-color 0.3s ease;
+}
+
+.entry-card:hover{
+  background-color: #485869;
+  color: white;
+}
