@@ -33,3 +33,8 @@ Content-Type: application/json
 
 ### Delete a Specific Journal Entry (Replace :id with actual ID)
 DELETE http://localhost:3300/journal/entries/669577e840c339282672e830
+
+###
+
+### Get Journal Entries by Email
+GET http://localhost:3300/journal/entries?email=alexeei@gmail.com

@@ -15,6 +15,12 @@ router.post('/new_entry', asyncHandler(async (req, res) => {
 }));
 
 router.get('/entries', asyncHandler(async (req, res) => {
+  // Check if an email query parameter is provided
+  if (req.query.email) {
+    const entriesByEmail = await JournalEntry.find({ email: req.query.email });
+    return res.status(200).send(entriesByEmail);
+  }
+  // If no email query, return all entries
   const entries = await JournalEntry.find({});
   res.status(200).send(entries);
 }));
