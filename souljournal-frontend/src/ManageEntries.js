@@ -199,7 +199,7 @@ const ManageEntries = () => {
   {selectedEntriesToShow.map((entry) => (
     <div
       key={entry._id}
-      className="card m-2 card-entry col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4"
+      className="card entry-card m-2 col-12 col-sm-6 col-md-3 col-lg-4 col-xl-4"
       style={{
         cursor: 'pointer',
         backgroundColor: isDeleting && selectedEntries.includes(entry._id) ? '#485869' : 'white',
