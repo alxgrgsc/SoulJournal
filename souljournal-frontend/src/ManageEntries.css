@@ -1,10 +1,10 @@
 .entry-card{
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease !important;
 }
 
 .entry-card:hover{
-  background-color: #485869;
-  color: white;
+  background-color: #485869 !important;
+  color: white !important;
 }
 
 .content-textarea{

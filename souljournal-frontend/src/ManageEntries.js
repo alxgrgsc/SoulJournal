@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import './ManageEntries.css';
 
 const ManageEntries = () => {
   const [entries, setEntries] = useState([]);
@@ -77,25 +78,25 @@ const ManageEntries = () => {
       return;
     }
 
-    if (window.confirm('Your entry will be deleted, are you sure?')){
-    await Promise.all(
-      selectedEntries.map((entryId) =>
-        fetch(`http://localhost:3300/journal/entries/${entryId}`, {
-          method: 'DELETE',
-        })
-      )
-    );
+    if (window.confirm('Your entry will be deleted, are you sure?')) {
+      await Promise.all(
+        selectedEntries.map((entryId) =>
+          fetch(`http://localhost:3300/journal/entries/${entryId}`, {
+            method: 'DELETE',
+          })
+        )
+      );
 
-    // Refresh entries after deletion
-    const response = await fetch(`http://localhost:3300/journal/entries?email=${userEmail}`);
-    const data = await response.json();
-    setEntries(data);
+      // Refresh entries after deletion
+      const response = await fetch(`http://localhost:3300/journal/entries?email=${userEmail}`);
+      const data = await response.json();
+      setEntries(data);
 
-    // Reset deletion state
-    setIsDeleting(false);
-    setSelectedEntries([]);
-  }
-};
+      // Reset deletion state
+      setIsDeleting(false);
+      setSelectedEntries([]);
+    }
+  };
 
   const handleEntrySelection = (entryId) => {
     if (selectedEntries.includes(entryId)) {
@@ -130,40 +131,48 @@ const ManageEntries = () => {
 
   return (
     <div className="container mt-5">
-      <h2>{entries.length > 0 ? "Manage Entries" : "There are no entries yet!"}</h2>
+      <h2>
+        {entries.length > 0
+          ? isDeleting
+            ? "Please select one or more entries to delete."
+            : "Manage Entries"
+          : "There are no entries yet!"}
+      </h2>
       {entries.length > 0 && (
         <>
-          <Button variant="danger" onClick={toggleDeleteMode}>
-            {isDeleting ? "Cancel" : "Delete"}
+          <Button className="btn button fixed-size-button" onClick={toggleDeleteMode}>
+            {isDeleting ? "Cancel" : "Delete Entries"}
           </Button>
           {isDeleting && selectedEntries.length > 0 && (
             <>
-              <Button variant="danger" onClick={handleDeleteSelectedEntries} className="ml-2">
+              <Button className="btn button fixed-size-button" onClick={handleDeleteSelectedEntries} >
                 Delete Selected
               </Button>
             </>
           )}
-        {isDeleting && entries.length > 1 && selectedEntries.length < entries.length && (
-          <>
-            <Button variant="primary" onClick={handleSelectAll} className="ml-2">
-              Select All
+          {isDeleting && entries.length > 1 && selectedEntries.length < entries.length && (
+            <>
+
+              <Button onClick={handleSelectAll} className="ml-2 btn button fixed-size-button">
+                Select All
+              </Button>
+            </>
+          )}
+          {isDeleting && selectedEntries.length > 0 && (
+            <Button onClick={handleDeselectAll} className="ml-2 btn button fixed-size-button">
+              Deselect All
             </Button>
-          </>
-        )}
-        {isDeleting && selectedEntries.length > 0 && (
-          <Button variant="secondary" onClick={handleDeselectAll} className="ml-2">
-            Deselect All
-          </Button>
-        )}
-          <div className="d-flex flex-wrap">
+          )}
+          <div className="row justify-content-center">
             {entries.map((entry) => (
               <div
                 key={entry._id}
-                className="card m-2 entry-card"
+                className="card m-2 entry-card col-12 col-sm-6 col-md-6 col-lg-6 col-xl-3 d-flex justify-content-center mb-3"
                 style={{
                   width: '18rem',
                   cursor: 'pointer',
-                  backgroundColor: isDeleting && selectedEntries.includes(entry._id) ? '#f8d7da' : 'white'
+                  backgroundColor: isDeleting && selectedEntries.includes(entry._id) ? '#485869' : 'white',
+                  color: isDeleting && selectedEntries.includes(entry._id) ? 'white' : '#485869'
                 }}
                 onClick={() => isDeleting && handleEntrySelection(entry._id)}
               >
