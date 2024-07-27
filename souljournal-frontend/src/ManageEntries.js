@@ -76,7 +76,8 @@ const ManageEntries = () => {
       console.error('No user email found in local storage.');
       return;
     }
-  
+
+    if (window.confirm('Your entry will be deleted, are you sure?')){
     await Promise.all(
       selectedEntries.map((entryId) =>
         fetch(`http://localhost:3300/journal/entries/${entryId}`, {
@@ -84,16 +85,17 @@ const ManageEntries = () => {
         })
       )
     );
-  
+
     // Refresh entries after deletion
     const response = await fetch(`http://localhost:3300/journal/entries?email=${userEmail}`);
     const data = await response.json();
     setEntries(data);
-  
+
     // Reset deletion state
     setIsDeleting(false);
     setSelectedEntries([]);
-  };
+  }
+};
 
   const handleEntrySelection = (entryId) => {
     if (selectedEntries.includes(entryId)) {
@@ -119,12 +121,19 @@ const ManageEntries = () => {
     setSelectedEntries([]);
   };
 
+  const toggleDeleteMode = () => {
+    if (isDeleting) {
+      setSelectedEntries([]);
+    }
+    setIsDeleting(!isDeleting);
+  };
+
   return (
     <div className="container mt-5">
       <h2>{entries.length > 0 ? "Manage Entries" : "There are no entries yet!"}</h2>
       {entries.length > 0 && (
         <>
-          <Button variant="danger" onClick={() => setIsDeleting(!isDeleting)}>
+          <Button variant="danger" onClick={toggleDeleteMode}>
             {isDeleting ? "Cancel" : "Delete"}
           </Button>
           {isDeleting && selectedEntries.length > 0 && (
@@ -134,17 +143,18 @@ const ManageEntries = () => {
               </Button>
             </>
           )}
-          {isDeleting && entries.length > 1 && (
-            <>
-              <Button variant="primary" onClick={handleSelectAll} className="ml-2">
-                Select All
-              </Button>
-              {selectedEntries.length > 0 && isDeleting && (
-          <Button variant="secondary" onClick={handleDeselectAll} className="ml-2">Deselect All
+        {isDeleting && entries.length > 1 && selectedEntries.length < entries.length && (
+          <>
+            <Button variant="primary" onClick={handleSelectAll} className="ml-2">
+              Select All
+            </Button>
+          </>
+        )}
+        {isDeleting && selectedEntries.length > 0 && (
+          <Button variant="secondary" onClick={handleDeselectAll} className="ml-2">
+            Deselect All
           </Button>
         )}
-            </>
-          )}
           <div className="d-flex flex-wrap">
             {entries.map((entry) => (
               <div
