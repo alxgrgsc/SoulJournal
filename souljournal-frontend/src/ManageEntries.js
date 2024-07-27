@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './ManageEntries.css';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 const ManageEntries = () => {
   const [entries, setEntries] = useState([]);
-  const [selectedEntry, setSelectedEntry] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [currentEntry, setCurrentEntry] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [editableContent, setEditableContent] = useState("");
-  const [editableTitle, setEditableTitle] = useState("");
+  const [editTitle, setEditTitle] = useState('');
+  const [editContent, setEditContent] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [selectedEntries, setSelectedEntries] = useState([]);
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -19,6 +18,7 @@ const ManageEntries = () => {
         console.error('No user email found in local storage.');
         return;
       }
+
       const response = await fetch(`http://localhost:3300/journal/entries?email=${userEmail}`);
       const data = await response.json();
       setEntries(data);
@@ -26,6 +26,82 @@ const ManageEntries = () => {
 
     fetchEntries();
   }, []);
+
+  const handleEntryClick = (entry) => {
+    setCurrentEntry(entry);
+    setEditTitle(entry.title);
+    setEditContent(entry.content);
+    setShowModal(true);
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = async () => {
+    const userEmail = localStorage.getItem('userEmail');
+    if (!userEmail) {
+      console.error('No user email found in local storage.');
+      return;
+    }
+
+    const response = await fetch(`http://localhost:3300/journal/entries/${currentEntry._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title: editTitle, content: editContent }),
+    });
+
+    if (response.ok) {
+      const updatedEntry = await response.json();
+      setEntries((prevEntries) =>
+        prevEntries.map((entry) => (entry._id === updatedEntry._id ? updatedEntry : entry))
+      );
+      setIsEditing(false);
+      setShowModal(false);
+    } else {
+      console.error('Failed to update entry.');
+    }
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+    setIsEditing(false);
+  };
+
+  const handleDeleteSelectedEntries = async () => {
+    const userEmail = localStorage.getItem('userEmail');
+    if (!userEmail) {
+      console.error('No user email found in local storage.');
+      return;
+    }
+  
+    await Promise.all(
+      selectedEntries.map((entryId) =>
+        fetch(`http://localhost:3300/journal/entries/${entryId}`, {
+          method: 'DELETE',
+        })
+      )
+    );
+  
+    // Refresh entries after deletion
+    const response = await fetch(`http://localhost:3300/journal/entries?email=${userEmail}`);
+    const data = await response.json();
+    setEntries(data);
+  
+    // Reset deletion state
+    setIsDeleting(false);
+    setSelectedEntries([]);
+  };
+
+  const handleEntrySelection = (entryId) => {
+    if (selectedEntries.includes(entryId)) {
+      setSelectedEntries(selectedEntries.filter((id) => id !== entryId));
+    } else {
+      setSelectedEntries([...selectedEntries, entryId]);
+    }
+  };
 
   function formatDate(createdAt) {
     const date = new Date(createdAt);
@@ -35,99 +111,115 @@ const ManageEntries = () => {
     return `${day}-${month}-${year}`;
   }
 
-  const handleEntryClick = (entry) => {
-    setSelectedEntry(entry);
-    setEditableContent(entry.content);
-    setEditableTitle(entry.title);
-    setShowModal(true);
-    setIsEditing(false); // Change this to false so the modal opens in read-only mode
+  const handleSelectAll = () => {
+    const allEntryIds = entries.map(entry => entry._id);
+    setSelectedEntries(allEntryIds);
   };
-
-  const handleSave = async () => {
-    if (!selectedEntry) return;
-    const updateUrl = `http://localhost:3300/journal/entries/${selectedEntry._id}`;
-
-    try {
-      const response = await fetch(updateUrl, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ title: editableTitle, content: editableContent }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to update entry');
-      }
-
-      const updatedEntry = await response.json();
-      const updatedEntries = entries.map(entry =>
-        entry._id === updatedEntry._id ? { ...entry, title: updatedEntry.title, content: updatedEntry.content } : entry
-      );
-      setEntries(updatedEntries);
-      setShowModal(false);
-    } catch (error) {
-      console.error('Error updating entry:', error);
-    }
-  };
-
-  const handleClose = () => {
-    setShowModal(false);
+  const handleDeselectAll = () => {
+    setSelectedEntries([]);
   };
 
   return (
     <div className="container mt-5">
-      <h2>Manage Entries</h2>
-      <div className="d-flex flex-wrap">
-        {entries.map((entry) => (
-          <div key={entry._id} className="card m-2 entry-card" style={{ width: '18rem', cursor: 'pointer' }} onClick={() => handleEntryClick(entry)}>
-            <div className="card-body">
-              <h5 className="card-title">{entry.title}</h5>
-              <p className="card-text">{formatDate(entry.createdAt)}</p>
-            </div>
+      <h2>{entries.length > 0 ? "Manage Entries" : "There are no entries yet!"}</h2>
+      {entries.length > 0 && (
+        <>
+          <Button variant="danger" onClick={() => setIsDeleting(!isDeleting)}>
+            {isDeleting ? "Cancel" : "Delete"}
+          </Button>
+          {isDeleting && selectedEntries.length > 0 && (
+            <>
+              <Button variant="danger" onClick={handleDeleteSelectedEntries} className="ml-2">
+                Delete Selected
+              </Button>
+            </>
+          )}
+          {isDeleting && entries.length > 1 && (
+            <>
+              <Button variant="primary" onClick={handleSelectAll} className="ml-2">
+                Select All
+              </Button>
+              {selectedEntries.length > 0 && isDeleting && (
+          <Button variant="secondary" onClick={handleDeselectAll} className="ml-2">Deselect All
+          </Button>
+        )}
+            </>
+          )}
+          <div className="d-flex flex-wrap">
+            {entries.map((entry) => (
+              <div
+                key={entry._id}
+                className="card m-2 entry-card"
+                style={{
+                  width: '18rem',
+                  cursor: 'pointer',
+                  backgroundColor: isDeleting && selectedEntries.includes(entry._id) ? '#f8d7da' : 'white'
+                }}
+                onClick={() => isDeleting && handleEntrySelection(entry._id)}
+              >
+                <div className="card-body" onClick={() => !isDeleting && handleEntryClick(entry)}>
+                  <h5 className="card-title">{entry.title}</h5>
+                  <p className="card-text">{formatDate(entry.createdAt)}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      )}
 
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>
-            {isEditing ? (
-              <input
-                type="text"
-                className="form-control"
-                value={editableTitle}
-                onChange={(e) => setEditableTitle(e.target.value)}
-              />
-            ) : (
-              selectedEntry?.title
-            )}
-          </Modal.Title>
+          <Modal.Title>{isEditing ? 'Edit Entry' : formatDate(currentEntry?.createdAt)}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {isEditing ? (
-            <textarea
-              className="form-control content-textarea"
-              value={editableContent}
-              onChange={(e) => setEditableContent(e.target.value)}
-            />
+            <Form>
+              <Form.Group controlId="editTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={editTitle}
+                  onChange={(e) => setEditTitle(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="editContent">
+                <Form.Label>Content</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  value={editContent}
+                  onChange={(e) => setEditContent(e.target.value)}
+                />
+              </Form.Group>
+            </Form>
           ) : (
-            <p>{selectedEntry?.content}</p>
+            <div>
+              <h2>{currentEntry?.title}</h2>
+              <p>{currentEntry?.content}</p>
+            </div>
           )}
         </Modal.Body>
         <Modal.Footer>
-  {isEditing ? (
-    <>
-      <Button variant="primary" onClick={handleSave}>Save</Button>
-      <Button variant="secondary" onClick={() => setIsEditing(false)}>Cancel</Button>
-    </>
-  ) : (
-    <>
-      <Button variant="primary" onClick={() => setIsEditing(true)}>Edit</Button>
-      <Button variant="secondary" onClick={handleClose}>Close</Button>
-    </>
-  )}
-</Modal.Footer>
+          {isEditing ? (
+            <>
+              <Button variant="secondary" onClick={() => setIsEditing(false)}>
+                Cancel
+              </Button>
+              <Button variant="primary" onClick={handleSave}>
+                Save
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="primary" onClick={handleEdit}>
+                Edit
+              </Button>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </>
+          )}
+        </Modal.Footer>
       </Modal>
     </div>
   );
