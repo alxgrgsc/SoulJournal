@@ -11,6 +11,8 @@ const ManageEntries = () => {
   const [showModal, setShowModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [selectedEntries, setSelectedEntries] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [entriesPerPage, setEntriesPerPage] = useState(4); // Default value
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -26,6 +28,21 @@ const ManageEntries = () => {
     };
 
     fetchEntries();
+  }, []);
+
+  useEffect(() => {
+    const updateEntriesPerPage = () => {
+      const width = window.innerWidth;
+      if (width < 576) setEntriesPerPage(1);
+      else if (width < 768) setEntriesPerPage(2);
+      else if (width < 992) setEntriesPerPage(3);
+      else setEntriesPerPage(4);
+    };
+
+    updateEntriesPerPage(); // Set initial value
+    window.addEventListener('resize', updateEntriesPerPage);
+
+    return () => window.removeEventListener('resize', updateEntriesPerPage);
   }, []);
 
   const handleEntryClick = (entry) => {
@@ -129,8 +146,24 @@ const ManageEntries = () => {
     setIsDeleting(!isDeleting);
   };
 
+  // Pagination related logic
+  const startIndex = currentPage * entriesPerPage;
+  const selectedEntriesToShow = entries.slice(startIndex, startIndex + entriesPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(entries.length / entriesPerPage) - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 justify-content-center">
       <h2>
         {entries.length > 0
           ? isDeleting
@@ -152,7 +185,6 @@ const ManageEntries = () => {
           )}
           {isDeleting && entries.length > 1 && selectedEntries.length < entries.length && (
             <>
-
               <Button onClick={handleSelectAll} className="ml-2 btn button fixed-size-button">
                 Select All
               </Button>
@@ -163,25 +195,33 @@ const ManageEntries = () => {
               Deselect All
             </Button>
           )}
-          <div className="row justify-content-center">
-            {entries.map((entry) => (
-              <div
-                key={entry._id}
-                className="card m-2 entry-card col-12 col-sm-6 col-md-6 col-lg-6 col-xl-3 d-flex justify-content-center mb-3"
-                style={{
-                  width: '18rem',
-                  cursor: 'pointer',
-                  backgroundColor: isDeleting && selectedEntries.includes(entry._id) ? '#485869' : 'white',
-                  color: isDeleting && selectedEntries.includes(entry._id) ? 'white' : '#485869'
-                }}
-                onClick={() => isDeleting && handleEntrySelection(entry._id)}
-              >
-                <div className="card-body" onClick={() => !isDeleting && handleEntryClick(entry)}>
-                  <h5 className="card-title">{entry.title}</h5>
-                  <p className="card-text">{formatDate(entry.createdAt)}</p>
-                </div>
-              </div>
-            ))}
+<div className="row justify-content-center">
+  {selectedEntriesToShow.map((entry) => (
+    <div
+      key={entry._id}
+      className="card m-2 card-entry col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4"
+      style={{
+        cursor: 'pointer',
+        backgroundColor: isDeleting && selectedEntries.includes(entry._id) ? '#485869' : 'white',
+        color: isDeleting && selectedEntries.includes(entry._id) ? 'white' : '#485869'
+      }}
+      onClick={() => isDeleting && handleEntrySelection(entry._id)}
+    >
+      <div className="card-body" onClick={() => !isDeleting && handleEntryClick(entry)}>
+        <h5 className="card-title">{entry.title}</h5>
+        <p className="card-text">{formatDate(entry.createdAt)}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+          <div className="row justify-content-center mt-4">
+            <Button onClick={handlePrevPage} disabled={currentPage === 0} className="btn button fixed-size-button mx-2">
+              &larr; Previous
+            </Button>
+            <Button onClick={handleNextPage} disabled={currentPage === Math.ceil(entries.length / entriesPerPage) - 1} className="btn button fixed-size-button mx-2">
+              Next &rarr;
+            </Button>
           </div>
         </>
       )}
