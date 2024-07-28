@@ -10,3 +10,23 @@
 .content-textarea{
   min-height: 145px !important;
 }
+
+button:disabled{
+  background-color: #485869 !important;
+  border-color: #485869 !important;
+}
+
+button:active {
+  background-color: #27313b !important; /* Darker shade for active state */
+  border-color: #27313b !important;
+  color: white !important; /* Ensure text color is visible */
+}
+
+button{
+  border-color: #485869 !important;
+}
+@media (min-width: 1400px) {
+  .custom-xl-width {
+    width: 1400px; /* Set your desired width here */
+  }
+}

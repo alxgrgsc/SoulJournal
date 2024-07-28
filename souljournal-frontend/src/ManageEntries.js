@@ -163,7 +163,7 @@ const ManageEntries = () => {
   };
 
   return (
-    <div className="d-flex row container mt-5 justify-content-center">
+    <div className="d-flex row container mt-5 justify-content-center ">
       <h2>
         {entries.length > 0
           ? isDeleting
@@ -200,7 +200,7 @@ const ManageEntries = () => {
   {selectedEntriesToShow.map((entry) => (
     <div
       key={entry._id}
-      className="card entry-card m-2 col-7 col-sm-8 col-md-8 col-lg-4 col-xl-4"
+      className="card entry-card m-2 col-7 col-sm-8 col-md-8 col-lg-5 col-xl-5"
       style={{
         cursor: 'pointer',
         backgroundColor: isDeleting && selectedEntries.includes(entry._id) ? '#485869' : 'white',
@@ -260,22 +260,22 @@ const ManageEntries = () => {
             </div>
           )}
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="d-flex justify-content-center">
           {isEditing ? (
             <>
-              <Button variant="secondary" onClick={() => setIsEditing(false)}>
+              <Button className="btn button fixed-size-button mx-2" onClick={() => setIsEditing(false)}>
                 Cancel
               </Button>
-              <Button variant="primary" onClick={handleSave}>
+              <Button className="btn button fixed-size-button mx-2" onClick={handleSave}>
                 Save
               </Button>
             </>
           ) : (
             <>
-              <Button variant="primary" onClick={handleEdit}>
+              <Button className="btn button fixed-size-button mx-2 " onClick={handleEdit}>
                 Edit
               </Button>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button variant="btn button fixed-size-button mx-2" onClick={handleClose}>
                 Close
               </Button>
             </>
