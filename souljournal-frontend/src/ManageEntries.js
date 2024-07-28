@@ -163,7 +163,7 @@ const ManageEntries = () => {
   };
 
   return (
-    <div className="container mt-5 justify-content-center">
+    <div className="d-flex row container mt-5 justify-content-center">
       <h2>
         {entries.length > 0
           ? isDeleting
@@ -195,11 +195,12 @@ const ManageEntries = () => {
               Deselect All
             </Button>
           )}
-<div className="row justify-content-center">
+
+            <div className="row justify-content-center">
   {selectedEntriesToShow.map((entry) => (
     <div
       key={entry._id}
-      className="card entry-card m-2 col-12 col-sm-6 col-md-3 col-lg-4 col-xl-4"
+      className="card entry-card m-2 col-7 col-sm-8 col-md-8 col-lg-4 col-xl-4"
       style={{
         cursor: 'pointer',
         backgroundColor: isDeleting && selectedEntries.includes(entry._id) ? '#485869' : 'white',
@@ -213,9 +214,10 @@ const ManageEntries = () => {
       </div>
     </div>
   ))}
-</div>
+            </div>
 
-          <div className="row justify-content-center mt-4">
+
+          <div className="d-flex justify-content-center mt-4 w-100">
             <Button onClick={handlePrevPage} disabled={currentPage === 0} className="btn button fixed-size-button mx-2">
               &larr; Previous
             </Button>
