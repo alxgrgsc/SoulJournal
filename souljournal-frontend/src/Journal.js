@@ -207,7 +207,7 @@ const Journal = () => {
         {entries.length > 0
           ? isDeleting
             ? "Please select one or more entries to delete."
-            : "Manage Entries"
+            : "Journal Entries"
           : "There are no entries yet!"}
       </h2>
       {entries.length > 0 && (
@@ -354,12 +354,15 @@ const Journal = () => {
           )}
         </Modal.Footer>
       </Modal>
-      <Button onClick={() => navigate('/new-entry')} className="btn button fixed-size-button mx-2">
+      <div className="d-flex justify-content-center mt-4 w-100">
+              <Button onClick={() => navigate('/new-entry')} className="btn button fixed-size-button mx-2 ">
         New Entry
       </Button>
-      <Button onClick={() => navigate('/dashboard')} className="btn button fixed-size-button mx-2">
+      <Button onClick={() => navigate('/dashboard')} className="btn button fixed-size-button mx-2 ">
         Dashboard
       </Button>
+      </div>
+
     </div>
   );
 };

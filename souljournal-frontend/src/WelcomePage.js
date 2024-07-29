@@ -15,13 +15,13 @@ function WelcomePage() {
       <p className="tagline mb-4">Write, reflect, transform daily.</p>
       <div className="buttons d-flex justify-content-center w-100">
         <div className="d-flex flex-grow-1">
-          <Link to="/login" className="w-100 me-3">
-            <button className="btn button  w-100 fixed-size-button">Login</button>
+          <Link to="/register" className="w-100 me-3">
+            <button className="btn button  w-100 fixed-size-button">Register</button>
           </Link>
         </div>
         <div className="d-flex flex-grow-1">
-          <Link to="/register" className="w-100">
-            <button className="btn button  w-100 fixed-size-button">Register</button>
+          <Link to="/login" className="w-100">
+            <button className="btn button  w-100 fixed-size-button">Login</button>
           </Link>
         </div>
       </div>

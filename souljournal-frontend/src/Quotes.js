@@ -1,6 +1,8 @@
 //imports
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Quotes.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //quotes component
 const Quotes = () => {
@@ -40,26 +42,26 @@ const Quotes = () => {
         }
     };
 
-    //navigate to page
-    const navigateTo = (page) => {
-        window.location.href = `/${page}`;
-    };
+    const navigate = useNavigate();
 
     return (
-        <div className="quote-container">
-            <div className="quote-text">{quote}</div>
-            <div className="quote-author">{author}</div>
-            <div className="quote-buttons">
-                <button className="button" onClick={fetchQuote}>Next Quote</button>
-                <button className="button" onClick={fetchPreviousQuote}>Previous Quote</button>
+        <div className="container mt-5 quote-container">
+            <div className="card-body">
+              <div className="quote-text card-text">{quote}</div>
+              <div className="quote-author card-subtitle mb-2 text-muted">{author}</div>
+              <div className="quote-buttons d-flex  mt-3">
+                <button className="btn button fixed-size-button" onClick={fetchQuote}>Next Quote</button>
+                <button className="btn button fixed-size-button" onClick={fetchPreviousQuote}>Previous Quote</button>
+              </div>
+                <div className="quote-buttons d-flex mt-3">
+                <button className="btn button fixed-size-button " onClick={() => navigate('/dashboard')}>Home</button>
+                <button className="btn button fixed-size-button " onClick={() => navigate('/journal')}>Journal</button>
+              
+              </div>
             </div>
-            <footer className="footer">
-                <button className="button" onClick={() => navigateTo('dashboard')}>Home</button>
-                <button className="button" onClick={() => navigateTo('journal')}>Journal</button>
-                <button className="button" onClick={() => navigateTo('settings')}>Settings</button>
-            </footer>
+
         </div>
-    );
+      );
 };
 
 //export

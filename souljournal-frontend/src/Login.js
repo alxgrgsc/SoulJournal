@@ -70,8 +70,8 @@ const Login = () => {
           />
         </div>
         <div className="buttons d-flex justify-content-center w-100">
-          <button type='submit' className="btn button  w-100 fixed-size-button">Login</button>
           <button className="btn button  w-100 fixed-size-button" onClick={handleDiscard}>Back</button>
+          <button type='submit' className="btn button  w-100 fixed-size-button">Login</button>
         </div>
       </form>
     </div>
