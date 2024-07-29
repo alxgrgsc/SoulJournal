@@ -8,6 +8,7 @@ const ManageEntries = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState('');
   const [editContent, setEditContent] = useState('');
+  const [editMood, setEditMood] = useState(''); // Default mood is neutral
   const [showModal, setShowModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [selectedEntries, setSelectedEntries] = useState([]);
@@ -49,6 +50,7 @@ const ManageEntries = () => {
     setCurrentEntry(entry);
     setEditTitle(entry.title);
     setEditContent(entry.content);
+    setEditMood(entry.mood);
     setShowModal(true);
   };
 
@@ -68,7 +70,7 @@ const ManageEntries = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title: editTitle, content: editContent }),
+      body: JSON.stringify({ title: editTitle, content: editContent, mood: editMood }),
     });
 
     if (response.ok) {
@@ -196,34 +198,34 @@ const ManageEntries = () => {
             </Button>
           )}
 
-            <div className="row justify-content-center">
-  {selectedEntriesToShow.map((entry) => (
-    <div
-      key={entry._id}
-      className="card entry-card m-2 col-7 col-sm-8 col-md-8 col-lg-5 col-xl-5"
-      style={{
-        cursor: 'pointer',
-        backgroundColor: isDeleting && selectedEntries.includes(entry._id) ? '#485869' : 'white',
-        color: isDeleting && selectedEntries.includes(entry._id) ? 'white' : '#485869'
-      }}
-      onClick={() => isDeleting && handleEntrySelection(entry._id)}
-    >
-          <div className="card-body" onClick={() => !isDeleting && handleEntryClick(entry)}>
-            <h5 className="card-title">
-              {entry.title}{' '}
-              <span role="img" aria-label={`mood-${entry.mood}`}>
-                {entry.mood === 1 && '😢'}
-                {entry.mood === 2 && '😟'}
-                {entry.mood === 3 && '😐'}
-                {entry.mood === 4 && '🙂'}
-                {entry.mood === 5 && '😄'}
-              </span>
-            </h5>
-            <p className="card-text">{new Date(entry.createdAt).toLocaleDateString()}</p>
+          <div className="row justify-content-center">
+            {selectedEntriesToShow.map((entry) => (
+              <div
+                key={entry._id}
+                className="card entry-card m-2 col-7 col-sm-8 col-md-8 col-lg-5 col-xl-5"
+                style={{
+                  cursor: 'pointer',
+                  backgroundColor: isDeleting && selectedEntries.includes(entry._id) ? '#485869' : 'white',
+                  color: isDeleting && selectedEntries.includes(entry._id) ? 'white' : '#485869'
+                }}
+                onClick={() => isDeleting && handleEntrySelection(entry._id)}
+              >
+                <div className="card-body" onClick={() => !isDeleting && handleEntryClick(entry)}>
+                  <h5 className="card-title">
+                    {entry.title}{' '}
+                    <span role="img" aria-label={`mood-${entry.mood}`}>
+                      {entry.mood === 1 && '😢'}
+                      {entry.mood === 2 && '😟'}
+                      {entry.mood === 3 && '😐'}
+                      {entry.mood === 4 && '🙂'}
+                      {entry.mood === 5 && '😄'}
+                    </span>
+                  </h5>
+                  <p className="card-text">{new Date(entry.createdAt).toLocaleDateString()}</p>
+                </div>
+              </div>
+            ))}
           </div>
-    </div>
-  ))}
-            </div>
 
 
           <div className="d-flex justify-content-center mt-4 w-100">
@@ -261,11 +263,32 @@ const ManageEntries = () => {
                   onChange={(e) => setEditContent(e.target.value)}
                 />
               </Form.Group>
+              <Form.Group controlId="editMood">
+                <Form.Label>Mood</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={editMood}
+                  onChange={(e) => setEditMood(e.target.value)}
+                >
+                  <option value={1}>😢 Sad</option>
+                  <option value={2}>😟 Worried</option>
+                  <option value={3}>😐 Neutral</option>
+                  <option value={4}>🙂 Happy</option>
+                  <option value={5}>😄 Very Happy</option>
+                </Form.Control>
+              </Form.Group>
             </Form>
           ) : (
             <div>
-              <h2>{currentEntry?.title}</h2>
+              <h2>{currentEntry?.title}                 <span role="img" aria-label={`mood-${currentEntry?.mood}`}>
+                  {currentEntry?.mood === 1 && '😢'}
+                  {currentEntry?.mood === 2 && '😟'}
+                  {currentEntry?.mood === 3 && '😐'}
+                  {currentEntry?.mood === 4 && '🙂'}
+                  {currentEntry?.mood === 5 && '😄'}
+                </span></h2>
               <p>{currentEntry?.content}</p>
+
             </div>
           )}
         </Modal.Body>
