@@ -208,10 +208,19 @@ const ManageEntries = () => {
       }}
       onClick={() => isDeleting && handleEntrySelection(entry._id)}
     >
-      <div className="card-body" onClick={() => !isDeleting && handleEntryClick(entry)}>
-        <h5 className="card-title">{entry.title}</h5>
-        <p className="card-text">{formatDate(entry.createdAt)}</p>
-      </div>
+          <div className="card-body" onClick={() => !isDeleting && handleEntryClick(entry)}>
+            <h5 className="card-title">
+              {entry.title}{' '}
+              <span role="img" aria-label={`mood-${entry.mood}`}>
+                {entry.mood === 1 && '😢'}
+                {entry.mood === 2 && '😟'}
+                {entry.mood === 3 && '😐'}
+                {entry.mood === 4 && '🙂'}
+                {entry.mood === 5 && '😄'}
+              </span>
+            </h5>
+            <p className="card-text">{new Date(entry.createdAt).toLocaleDateString()}</p>
+          </div>
     </div>
   ))}
             </div>
