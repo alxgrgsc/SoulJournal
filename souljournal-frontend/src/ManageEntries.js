@@ -43,8 +43,20 @@ const ManageEntries = () => {
     updateEntriesPerPage(); // Set initial value
     window.addEventListener('resize', updateEntriesPerPage);
 
-    return () => window.removeEventListener('resize', updateEntriesPerPage);
-  }, []);
+
+    const handleBeforeUnload = (event) => {
+      if(isEditing) {
+        event.preventDefault();
+        event.returnValue = '';
+      }
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('resize', updateEntriesPerPage);
+    };
+  }, [isEditing]);
 
   const handleEntryClick = (entry) => {
     setCurrentEntry(entry);
