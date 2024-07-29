@@ -355,11 +355,11 @@ const Journal = () => {
         </Modal.Footer>
       </Modal>
       <div className="d-flex justify-content-center mt-4 w-100">
-              <Button onClick={() => navigate('/new-entry')} className="btn button fixed-size-button mx-2 ">
-        New Entry
-      </Button>
-      <Button onClick={() => navigate('/dashboard')} className="btn button fixed-size-button mx-2 ">
+              <Button onClick={() => navigate('/dashboard')} className="btn button fixed-size-button mx-2 ">
         Dashboard
+      </Button>
+      <Button onClick={() => navigate('/new-entry')} className="btn button fixed-size-button mx-2 ">
+        New Entry
       </Button>
       </div>
 
