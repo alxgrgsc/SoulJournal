@@ -65,6 +65,7 @@ const ManageEntries = () => {
       return;
     }
 
+    if (window.confirm('Your entry will be updated, are you sure?')) {
     const response = await fetch(`http://localhost:3300/journal/entries/${currentEntry._id}`, {
       method: 'PUT',
       headers: {
@@ -83,8 +84,8 @@ const ManageEntries = () => {
     } else {
       console.error('Failed to update entry.');
     }
-  };
-
+  }
+  }
   const handleClose = () => {
     setShowModal(false);
     setIsEditing(false);
@@ -97,7 +98,9 @@ const ManageEntries = () => {
       return;
     }
 
-    if (window.confirm('Your entry will be deleted, are you sure?')) {
+    const entryString = selectedEntries.length > 1 ? 'entries' : 'entry';
+
+    if (window.confirm(`Are you sure you want to delete the selected ${entryString}?`)) {
       await Promise.all(
         selectedEntries.map((entryId) =>
           fetch(`http://localhost:3300/journal/entries/${entryId}`, {
