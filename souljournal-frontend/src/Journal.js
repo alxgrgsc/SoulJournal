@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
-import './ManageEntries.css';
+import { Modal, Button, Form, Alert } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import './Journal.css';
 
-const ManageEntries = () => {
+const Journal = () => {
   const [entries, setEntries] = useState([]);
   const [currentEntry, setCurrentEntry] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -14,6 +15,9 @@ const ManageEntries = () => {
   const [selectedEntries, setSelectedEntries] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [entriesPerPage, setEntriesPerPage] = useState(4); // Default value
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEntries = async () => {
@@ -45,7 +49,7 @@ const ManageEntries = () => {
 
 
     const handleBeforeUnload = (event) => {
-      if(isEditing) {
+      if (isEditing) {
         event.preventDefault();
         event.returnValue = '';
       }
@@ -78,25 +82,30 @@ const ManageEntries = () => {
     }
 
     if (window.confirm('Your entry will be updated, are you sure?')) {
-    const response = await fetch(`http://localhost:3300/journal/entries/${currentEntry._id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ title: editTitle, content: editContent, mood: editMood }),
-    });
+      const response = await fetch(`http://localhost:3300/journal/entries/${currentEntry._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: editTitle, content: editContent, mood: editMood }),
+      });
 
-    if (response.ok) {
-      const updatedEntry = await response.json();
-      setEntries((prevEntries) =>
-        prevEntries.map((entry) => (entry._id === updatedEntry._id ? updatedEntry : entry))
-      );
-      setIsEditing(false);
-      setShowModal(false);
-    } else {
-      console.error('Failed to update entry.');
+      if (response.ok) {
+        const updatedEntry = await response.json();
+        setEntries((prevEntries) =>
+          prevEntries.map((entry) => (entry._id === updatedEntry._id ? updatedEntry : entry))
+        );
+        setNotificationMessage('Your entry has been updated!');
+        setIsEditing(false);
+        setShowModal(false);
+        setShowNotification(true);
+        setTimeout(() => {
+          setShowNotification(false);
+        }, 2500);
+      } else {
+        console.error('Failed to update entry.');
+      }
     }
-  }
   }
   const handleClose = () => {
     setShowModal(false);
@@ -121,14 +130,22 @@ const ManageEntries = () => {
         )
       );
 
+
+
       // Refresh entries after deletion
       const response = await fetch(`http://localhost:3300/journal/entries?email=${userEmail}`);
       const data = await response.json();
       setEntries(data);
 
       // Reset deletion state
+      setNotificationMessage(`Your ${entryString} has been deleted!`);
+      setShowNotification(true);
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 2500);
       setIsDeleting(false);
       setSelectedEntries([]);
+
     }
   };
 
@@ -181,6 +198,11 @@ const ManageEntries = () => {
 
   return (
     <div className="d-flex row container mt-5 justify-content-center ">
+      {showNotification && (
+        <Alert variant="success" className="animation">
+          {notificationMessage}
+        </Alert>
+      )}
       <h2>
         {entries.length > 0
           ? isDeleting
@@ -254,7 +276,10 @@ const ManageEntries = () => {
         </>
       )}
 
+
+
       <Modal show={showModal} onHide={handleClose}>
+
         <Modal.Header closeButton>
           <Modal.Title>{isEditing ? 'Edit Entry' : formatDate(currentEntry?.createdAt)}</Modal.Title>
         </Modal.Header>
@@ -296,12 +321,12 @@ const ManageEntries = () => {
           ) : (
             <div>
               <h2>{currentEntry?.title}                 <span role="img" aria-label={`mood-${currentEntry?.mood}`}>
-                  {currentEntry?.mood === 1 && '😢'}
-                  {currentEntry?.mood === 2 && '😟'}
-                  {currentEntry?.mood === 3 && '😐'}
-                  {currentEntry?.mood === 4 && '🙂'}
-                  {currentEntry?.mood === 5 && '😄'}
-                </span></h2>
+                {currentEntry?.mood === 1 && '😢'}
+                {currentEntry?.mood === 2 && '😟'}
+                {currentEntry?.mood === 3 && '😐'}
+                {currentEntry?.mood === 4 && '🙂'}
+                {currentEntry?.mood === 5 && '😄'}
+              </span></h2>
               <p>{currentEntry?.content}</p>
 
             </div>
@@ -319,18 +344,24 @@ const ManageEntries = () => {
             </>
           ) : (
             <>
-              <Button className="btn button fixed-size-button mx-2 " onClick={handleEdit}>
-                Edit
-              </Button>
-              <Button variant="btn button fixed-size-button mx-2" onClick={handleClose}>
+              <Button className="btn button fixed-size-button mx-2 " onClick={handleClose}>
                 Close
+              </Button>
+              <Button variant="btn button fixed-size-button mx-2" onClick={handleEdit}>
+                Edit
               </Button>
             </>
           )}
         </Modal.Footer>
       </Modal>
+      <Button onClick={() => navigate('/new-entry')} className="btn button fixed-size-button mx-2">
+        New Entry
+      </Button>
+      <Button onClick={() => navigate('/dashboard')} className="btn button fixed-size-button mx-2">
+        Dashboard
+      </Button>
     </div>
   );
 };
 
-export default ManageEntries;
+export default Journal;

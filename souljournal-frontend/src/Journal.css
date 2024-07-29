@@ -30,3 +30,16 @@ button{
     width: 1400px; /* Set your desired width here */
   }
 }
+
+.animation {
+  animation: slideDown 1s forwards, fadeOut 2s 1s forwards;
+}
+
+@keyframes fadeOut{
+  from {
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+}

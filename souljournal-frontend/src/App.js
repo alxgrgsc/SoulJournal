@@ -12,7 +12,7 @@ import Quotes from './Quotes';
 import FeedbackSubmitted from './FeedbackSubmitted';
 import NewEntry from './NewEntry';
 import EntrySubmitted from './EntrySubmitted'; // Import the new component
-import ManageEntries from './ManageEntries';
+import Journal from './Journal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -34,7 +34,7 @@ function App() {
             <Route path="/feedback-submitted" element={<FeedbackSubmitted />} />
             <Route path="/new-entry" element={<NewEntry />} /> 
             <Route path="/entry-submitted" element={<EntrySubmitted />} /> {/* Add the new route */}
-            <Route path="/manage-entries" element={<ManageEntries />} />
+            <Route path="/journal" element={<Journal />} />
           </Routes>
         </header>
       </div>

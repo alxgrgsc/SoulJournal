@@ -50,7 +50,7 @@ const Dashboard = () => {
           <Link to="/new-entry" className="btn w-100 fs-5 fs-lg-4 dashboard-button">Create Entry</Link>
         </div>
         <div className="col-12 col-md-6 mb-3">
-          <Link to="/manage-entries" className="btn w-100 fs-5 fs-lg-4 dashboard-button">Manage Entries</Link>
+          <Link to="/journal" className="btn w-100 fs-5 fs-lg-4 dashboard-button">Journal</Link>
         </div>
         <div className="col-12 col-md-6 mb-3">
           <Link to="/quotes" className="btn w-100 fs-5 fs-lg-4 dashboard-button">Quotes</Link>
