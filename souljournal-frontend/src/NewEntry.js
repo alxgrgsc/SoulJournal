@@ -27,6 +27,7 @@ const NewEntry = () => {
     e.preventDefault();
     const email = localStorage.getItem('userEmail');
 
+    if(window.confirm('Are you sure you want to save this entry?')) {
     const response = await fetch('http://localhost:3300/journal/new_entry', {
       method: 'POST',
       headers: {
@@ -34,6 +35,7 @@ const NewEntry = () => {
       },
       body: JSON.stringify({ title, content, mood, email }),
     });
+    
 
     if (response.ok) {
       const result = await response.json();
@@ -41,7 +43,7 @@ const NewEntry = () => {
     } else {
       console.error(`Failed to save entry`);
     }
-
+  }
   };
 
   return (
