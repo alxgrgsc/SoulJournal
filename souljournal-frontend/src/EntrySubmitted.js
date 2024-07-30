@@ -1,8 +1,10 @@
+//imports 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './EntrySubmitted.css';
 
+//entry submitted component
 const EntrySubmitted = () => {
   const navigate = useNavigate();
 
@@ -19,4 +21,5 @@ const EntrySubmitted = () => {
   );
 };
 
+//export entry submitted component
 export default EntrySubmitted;

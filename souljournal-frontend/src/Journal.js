@@ -1,8 +1,10 @@
+//imports 
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './Journal.css';
 
+//journal component
 const Journal = () => {
   const [entries, setEntries] = useState([]);
   const [currentEntry, setCurrentEntry] = useState(null);
@@ -19,6 +21,7 @@ const Journal = () => {
   const [notificationMessage, setNotificationMessage] = useState('');
   const navigate = useNavigate();
 
+  //fetch entries
   useEffect(() => {
     const fetchEntries = async () => {
       const userEmail = localStorage.getItem('userEmail');
@@ -35,6 +38,8 @@ const Journal = () => {
     fetchEntries();
   }, []);
 
+
+  //update entries per page based on window width
   useEffect(() => {
     const updateEntriesPerPage = () => {
       const width = window.innerWidth;
@@ -44,10 +49,10 @@ const Journal = () => {
       else setEntriesPerPage(4);
     };
 
-    updateEntriesPerPage(); // Set initial value
+    updateEntriesPerPage();
     window.addEventListener('resize', updateEntriesPerPage);
 
-
+    //handle before unload
     const handleBeforeUnload = (event) => {
       if (isEditing) {
         event.preventDefault();
@@ -55,6 +60,7 @@ const Journal = () => {
       }
     }
 
+    //add event listeners
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
@@ -62,6 +68,7 @@ const Journal = () => {
     };
   }, [isEditing]);
 
+  //handle entry click
   const handleEntryClick = (entry) => {
     setCurrentEntry(entry);
     setEditTitle(entry.title);
@@ -70,10 +77,12 @@ const Journal = () => {
     setShowModal(true);
   };
 
+  //handle edit
   const handleEdit = () => {
     setIsEditing(true);
   };
 
+  //handle save
   const handleSave = async () => {
     const userEmail = localStorage.getItem('userEmail');
     if (!userEmail) {
@@ -107,11 +116,14 @@ const Journal = () => {
       }
     }
   }
+
+  //handle close
   const handleClose = () => {
     setShowModal(false);
     setIsEditing(false);
   };
 
+  //handle delete selected entries
   const handleDeleteSelectedEntries = async () => {
     const userEmail = localStorage.getItem('userEmail');
     if (!userEmail) {
@@ -132,12 +144,12 @@ const Journal = () => {
 
 
 
-      // Refresh entries after deletion
+      //refresh entries after deletion
       const response = await fetch(`http://localhost:3300/journal/entries?email=${userEmail}`);
       const data = await response.json();
       setEntries(data);
 
-      // Reset deletion state
+      //reset deletion state
       setNotificationMessage(`Your ${entryString} has been deleted!`);
       setShowNotification(true);
       setTimeout(() => {
@@ -149,6 +161,7 @@ const Journal = () => {
     }
   };
 
+  //handle entry selection
   const handleEntrySelection = (entryId) => {
     if (selectedEntries.includes(entryId)) {
       setSelectedEntries(selectedEntries.filter((id) => id !== entryId));
@@ -157,6 +170,7 @@ const Journal = () => {
     }
   };
 
+  //format date
   function formatDate(createdAt) {
     const date = new Date(createdAt);
     const year = date.getFullYear();
@@ -165,14 +179,18 @@ const Journal = () => {
     return `${day}-${month}-${year}`;
   }
 
+  //handle select all
   const handleSelectAll = () => {
     const allEntryIds = entries.map(entry => entry._id);
     setSelectedEntries(allEntryIds);
   };
+
+  //handle deselect all
   const handleDeselectAll = () => {
     setSelectedEntries([]);
   };
 
+  //toggle delete mode
   const toggleDeleteMode = () => {
     if (isDeleting) {
       setSelectedEntries([]);
@@ -180,16 +198,18 @@ const Journal = () => {
     setIsDeleting(!isDeleting);
   };
 
-  // Pagination related logic
+  //pagination logic 
   const startIndex = currentPage * entriesPerPage;
   const selectedEntriesToShow = entries.slice(startIndex, startIndex + entriesPerPage);
 
+  //handle next page
   const handleNextPage = () => {
     if (currentPage < Math.ceil(entries.length / entriesPerPage) - 1) {
       setCurrentPage(currentPage + 1);
     }
   };
 
+  //handle previous page
   const handlePrevPage = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
@@ -367,4 +387,5 @@ const Journal = () => {
   );
 };
 
+//export journal component
 export default Journal;

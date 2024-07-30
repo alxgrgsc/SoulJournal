@@ -1,7 +1,8 @@
 //imports 
 import React from 'react';
-import './SoulJournalLogo.css'; // Ensure you have this CSS file
+import './SoulJournalLogo.css'; 
 
+//soul journal logo component
 const SoulJournalLogo = () => {
   return (
     <div className="logo">
@@ -11,4 +12,5 @@ const SoulJournalLogo = () => {
   );
 };
 
+//export soul journal logo component
 export default SoulJournalLogo;

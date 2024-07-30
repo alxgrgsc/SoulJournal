@@ -42,6 +42,7 @@ const Quotes = () => {
         }
     };
 
+    //use navigate
     const navigate = useNavigate();
 
     return (
