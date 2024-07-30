@@ -48,7 +48,7 @@ const Quotes = () => {
         <div className="container mt-5 quote-container">
             <div className="card-body">
                 <div className="quote-text card-text">{quote}</div>
-                <div className="quote-author card-subtitle mb-2 text-muted">{author}</div>
+                <div className="quote-author card-subtitle mb-2 ">{author}</div>
                 <div className="quote-buttons d-flex  mt-3">
                     <button className="btn button fixed-size-button" onClick={fetchPreviousQuote}>Previous Quote</button>
                     <button className="btn button fixed-size-button" onClick={fetchQuote}>Next Quote</button>
