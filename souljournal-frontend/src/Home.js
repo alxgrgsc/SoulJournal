@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Dashboard.css';
+import './Home.css';
 
-//dashboard component 
-const Dashboard = () => {
+//home component 
+const Home = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
@@ -66,5 +66,5 @@ const Dashboard = () => {
   );
 };
 
-//export dashboard component
-export default Dashboard;
+//export home component
+export default Home;

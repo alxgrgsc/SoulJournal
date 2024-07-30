@@ -18,7 +18,7 @@ const NewEntry = () => {
       setTitle('');
       setContent('');
       setMood(3); // Reset mood to neutral
-      navigate('/dashboard');
+      navigate('/home');
     }
   };
 
@@ -27,23 +27,23 @@ const NewEntry = () => {
     e.preventDefault();
     const email = localStorage.getItem('userEmail');
 
-    if(window.confirm('Are you sure you want to save this entry?')) {
-    const response = await fetch('http://localhost:3300/journal/new_entry', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ title, content, mood, email }),
-    });
-    
+    if (window.confirm('Are you sure you want to save this entry?')) {
+      const response = await fetch('http://localhost:3300/journal/new_entry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, content, mood, email }),
+      });
 
-    if (response.ok) {
-      const result = await response.json();
-      navigate(`/entry-submitted`);
-    } else {
-      console.error(`Failed to save entry`);
+
+      if (response.ok) {
+        const result = await response.json();
+        navigate(`/entry-submitted`);
+      } else {
+        console.error(`Failed to save entry`);
+      }
     }
-  }
   };
 
   return (
@@ -99,8 +99,9 @@ const NewEntry = () => {
           </div>
         </div>
         <div className="button-group">
+          <button type="button" className="btn button fixed-size-button" onClick={handleDiscard}>Discard Entry</button>
           <button type="submit" className="btn button fixed-size-button">Save Entry</button>
-          <button type="button" className="btn button fixed-size-button" onClick={handleDiscard}>Discard</button>
+
         </div>
       </form>
     </div>

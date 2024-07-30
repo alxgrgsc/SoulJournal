@@ -1,0 +1,39 @@
+body.dark-mode {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --button-background: #162226;
+  --button-text: #F2F4F5;
+  --button-background-hover: #223237;
+  --mood-checked-color: #7b8588a2;
+  
+}
+
+body {
+  --background-color: rgb(227, 223, 223);
+  --text-color: black;
+  --button-background: #f8f9fa;
+  --button-text: #485869;
+  --button-background-hover: #485869;
+  --button-color-hover: white;
+  --mood-checked-color: #485869;
+}
+
+body, .container {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.btn {
+  background-color: var(--button-background);
+  color: var(--button-text);
+}
+
+.btn:hover {
+  background-color: var(--button-background-hover);
+  color: var(--button-color-hover);
+}
+
+.mood-button:hover, .checked-mood {
+  background-color: var(--mood-checked-color);
+  color: #fff;
+}

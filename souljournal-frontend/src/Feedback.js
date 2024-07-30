@@ -52,7 +52,7 @@ const Feedback = () => {
       setStars(0);
       setHoverStars(0);
       setError('');
-      navigate("/dashboard");
+      navigate("/home");
     }
   };
 
@@ -85,8 +85,9 @@ const Feedback = () => {
         </div>
         {error && <div className="alert alert-danger">{error}</div>}
         
-        <button type="submit" className="btn button">Submit Feedback</button>
+
         <button type="button" className="btn button" onClick={handleDiscard}>Discard Feedback</button>
+        <button type="submit" className="btn button">Submit Feedback</button>
       </form>
     </div>
   );

@@ -7,12 +7,13 @@ import Login from './Login';
 import ForgotPassword from './ForgotPassword';
 import Feedback from './Feedback';
 import RegistrationSuccess from './RegistrationSuccess';
-import Dashboard from './Dashboard';
+import Home from './Home';
 import Quotes from './Quotes';
 import FeedbackSubmitted from './FeedbackSubmitted';
 import NewEntry from './NewEntry';
 import EntrySubmitted from './EntrySubmitted'; // Import the new component
 import Journal from './Journal';
+import Settings from './Settings';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -29,12 +30,13 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/registration-success" element={<RegistrationSuccess />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/quotes" element={<Quotes />} />
             <Route path="/feedback-submitted" element={<FeedbackSubmitted />} />
             <Route path="/new-entry" element={<NewEntry />} /> 
             <Route path="/entry-submitted" element={<EntrySubmitted />} /> {/* Add the new route */}
             <Route path="/journal" element={<Journal />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </header>
       </div>

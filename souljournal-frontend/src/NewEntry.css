@@ -27,12 +27,19 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
+
+
+#content {
+  min-height: 149px;
+}
+
+.form-control-plaintext {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
 .mood-button:hover,
 .checked-mood {
   background-color: #485869;
   color: #fff;
-}
-
-#content {
-  min-height: 149px;
 }

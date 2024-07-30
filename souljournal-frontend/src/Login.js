@@ -23,7 +23,7 @@ const Login = () => {
         const data = await response.json();
         localStorage.setItem('token', data.token);
         localStorage.setItem('userEmail', email); // Store the email in localStorage
-        navigate('/dashboard');
+        navigate('/home');
       } else {
         const data = await response.json();
         setError(data.message || 'Login failed');

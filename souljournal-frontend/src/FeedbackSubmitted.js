@@ -1,6 +1,7 @@
 //imports 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FeedbackSubmitted.css';
 
@@ -8,17 +9,15 @@ import './FeedbackSubmitted.css';
 const FeedbackSubmitted = () => {
   const navigate = useNavigate();
 
-  //handle back to home
-  const handleBackToHome = () => {
-    navigate('/dashboard');
-  };
+
 
   return (
-    <div className="container submit-feedback-container mt-5 text-center">
+    <div className="container mt-5 text-center">
       <h1 className="mb-4">Your feedback has been submitted!</h1>
-      <button className="btn " onClick={handleBackToHome}>
-        Back to Home
+      <button className="btn button fixed-size-button" onClick={() => navigate('/home')}>
+        Home
       </button>
+      
     </div>
   );
 };
