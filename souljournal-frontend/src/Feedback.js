@@ -79,7 +79,7 @@ const Feedback = () => {
               onClick={() => setStars(star)}
               onMouseEnter={() => setHoverStars(star)}
               onMouseLeave={() => setHoverStars(stars)}
-              style={{ cursor: 'pointer', fontSize: '1.5rem', color: star <= (hoverStars || stars) ? '#485869' : '#e4e5e9' }}
+              style={{ cursor: 'pointer', fontSize: '1.5rem', color: star <= (hoverStars || stars) ? '#303b47' : '#6d7c8b' }}
             />
           ))}
         </div>
