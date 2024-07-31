@@ -1,6 +1,7 @@
 //imports 
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
 
@@ -8,6 +9,18 @@ import './Home.css';
 const Home = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const location = useLocation();
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState('');
+
+  useEffect(() => {
+    if (location.state && location.state.from === 'login') {
+      setNotificationMessage('You have successfully logged in!');
+      setShowNotification(true);
+      setTimeout(() => setShowNotification(false), 3000); // Hide notification after 3 seconds
+    }
+  }, [location.state]);
+
 
   useEffect(() => {
     //get user email from local storage 
@@ -30,7 +43,7 @@ const Home = () => {
         console.error('Error fetching user details:', error);
       }
     };
-    
+
     //check if email is present
     if (email) {
       fetchUserDetails();
@@ -45,6 +58,11 @@ const Home = () => {
   return (
     <div className="container-fluid d-flex align-items-center justify-content-center min-vh-100 slide-down">
       <div className="row w-100 justify-content-center text-center">
+      {showNotification && (
+        <Alert variant="success" className="animation">
+          {notificationMessage}
+        </Alert>
+        )}
         <h1 className="mb-4">Welcome back, {firstName}!</h1>
         <div className="col-12 col-md-6 mb-3">
           <Link to="/new-entry" className="btn w-100 fs-5 fs-lg-4 dashboard-button">Create Entry</Link>
