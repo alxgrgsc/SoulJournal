@@ -23,11 +23,11 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        localStorage.setItem('userEmail', email); // Store the email in localStorage
+        localStorage.setItem('userEmail', email);
         navigate('/home', { state: { from: 'login' } });
       } else {
         const data = await response.json();
-        setError(data.message || 'Login failed');
+        setError(data.message || 'Your email/password details are incorrect');
       }
     } catch (error) {
       setError('An error occurred. Please try again.');

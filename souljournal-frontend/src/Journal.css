@@ -17,9 +17,9 @@ button:disabled{
 }
 
 button:active {
-  background-color: #27313b !important; /* Darker shade for active state */
+  background-color: #27313b !important; 
   border-color: #27313b !important;
-  color: white !important; /* Ensure text color is visible */
+  color: white !important; 
 }
 
 button{
@@ -27,7 +27,7 @@ button{
 }
 @media (min-width: 1400px) {
   .custom-xl-width {
-    width: 1400px; /* Set your desired width here */
+    width: 1400px; 
   }
 }
 

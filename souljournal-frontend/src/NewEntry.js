@@ -8,7 +8,7 @@ import './NewEntry.css';
 const NewEntry = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [mood, setMood] = useState(3); // Default mood is neutral
+  const [mood, setMood] = useState(3); 
   const currentDate = new Date().toLocaleDateString();
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const NewEntry = () => {
     if (window.confirm('Your entry will be discarded, are you sure?')) {
       setTitle('');
       setContent('');
-      setMood(3); // Reset mood to neutral
+      setMood(3); 
       navigate('/home');
     }
   };
@@ -108,5 +108,5 @@ const NewEntry = () => {
   );
 };
 
-//export
+//export NewEntry component
 export default NewEntry;

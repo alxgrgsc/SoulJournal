@@ -14,7 +14,7 @@ body {
   opacity: 0;
   transform: translateY(50px);
   animation: slideDown 2s forwards;
-  transition: opacity 5s ease-in-out; /* Add this line for the opacity transition */
+  transition: opacity 5s ease-in-out; 
 }
 
 @keyframes slideDown {
@@ -30,19 +30,19 @@ body {
 
 .quote-text {
   font-size: 1.5rem;
-  max-width: 50ch; /* Limit the width to 50 characters */
+  max-width: 50ch; 
   font-style: italic;
   font-weight: bold;
   color: #555;
   margin-bottom: 10px;
-  padding: 0 20px; /* Add padding for better readability */
+  padding: 0 20px; 
 }
 
 .quote-author {
   font-size: 1.2rem;
   color: #777;
   margin-bottom: 20px;
-  padding: 0 20px; /* Add padding for better readability */
+  padding: 0 20px; 
 }
 
 .quote-buttons {

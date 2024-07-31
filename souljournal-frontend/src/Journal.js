@@ -48,7 +48,8 @@ const Journal = () => {
       else if (width < 992) setEntriesPerPage(3);
       else setEntriesPerPage(4);
     };
-
+    
+    //add event listener
     updateEntriesPerPage();
     window.addEventListener('resize', updateEntriesPerPage);
 

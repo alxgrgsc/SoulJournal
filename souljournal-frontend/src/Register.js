@@ -13,6 +13,7 @@ const Register = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const MIN_PASSWORD_LENGTH = 5;
 
   //handle submit feedback
   const handleSubmit = async (e) => {
@@ -21,6 +22,22 @@ const Register = () => {
       setError('Passwords do not match');
       return;
     }
+
+    //validate password
+    if (password.length < MIN_PASSWORD_LENGTH) {
+      setError(`Password must be at least ${MIN_PASSWORD_LENGTH} characters`);
+      return;
+    }
+
+    //validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/;
+
+    //check if email is valid
+    if (!emailRegex.test(email)) {
+      setError('Invalid email format ("e.g. example@gmail.com")');
+      return;
+    }
+
 
     try {
       const response = await fetch('http://localhost:3300/auth/register', {

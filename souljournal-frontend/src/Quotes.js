@@ -66,5 +66,5 @@ const Quotes = () => {
     );
 };
 
-//export
+//export quotes component
 export default Quotes;

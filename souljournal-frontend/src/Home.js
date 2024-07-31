@@ -13,6 +13,7 @@ const Home = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
 
+  //show notification message when user logs in
   useEffect(() => {
     if (location.state && location.state.from === 'login') {
       setNotificationMessage('You have successfully logged in!');
