@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import WelcomePage from './WelcomePage';
 import Register from './Register';
 import Login from './Login';
-import ForgotPassword from './ForgotPassword';
 import Feedback from './Feedback';
 import RegistrationSuccess from './RegistrationSuccess';
 import Home from './Home';
@@ -27,7 +26,6 @@ function App() {
             <Route exact path="/" element={<WelcomePage />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/registration-success" element={<RegistrationSuccess />} />
             <Route path="/home" element={<Home />} />

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NewEntry.css';
+import RadioPlayer from './RadioPlayer'; 
 
 //NewEntry component
 const NewEntry = () => {
@@ -101,9 +102,10 @@ const NewEntry = () => {
         <div className="button-group">
           <button type="button" className="btn button fixed-size-button" onClick={handleDiscard}>Discard Entry</button>
           <button type="submit" className="btn button fixed-size-button">Save Entry</button>
-
         </div>
       </form>
+      <RadioPlayer /> {/* Add the RadioPlayer component here */}
+
     </div>
   );
 };

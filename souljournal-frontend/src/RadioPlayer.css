@@ -1,0 +1,17 @@
+.radio-player .controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.slider{
+  width: 100% 
+}
+
+.radio-player button {
+  margin-top: 10px; /* Optional: Adds space above the button */
+}
+
+h3{
+  margin-top: 30px;
+}
