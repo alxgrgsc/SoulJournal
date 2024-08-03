@@ -30,7 +30,7 @@ const RadioPlayer = () => {
   return (
     <div className="radio-player">
       <h3>Radio Player</h3>
-      <audio ref={audioRef} src="http://live.amperwave.net/direct/ppm-jazz24mp3-ibc1" />
+      <audio ref={audioRef} src="https://live.radiospinner.com/coffee-jazz-64" />
       <div className="controls">
         <input
           type="range"
