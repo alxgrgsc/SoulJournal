@@ -1,14 +1,34 @@
 //imports
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { Link, useLocation} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './WelcomePage.css';
 import SoulJournalLogo from './SoulJournalLogo';
 
+
+
 //welcomePage component
 function WelcomePage() {
+  const location = useLocation();
+  const [showAlert, setShowAlert] = useState(false);
+  
+  useEffect(() => {
+    if (location.state && location.state.fromLogout) {
+      setShowAlert(true);
+      const timer = setTimeout(() => {
+        setShowAlert(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
+
   return (
     <div className="home container-fluid d-flex flex-column align-items-center justify-content-center min-vh-100 text-center">
+      {showAlert && (
+        <div className="alert alert-success animation" role="alert">
+          You have been logged out!
+        </div>
+      )}
       <div className="logo-container mb-4">
         <SoulJournalLogo />
       </div>

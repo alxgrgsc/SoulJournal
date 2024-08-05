@@ -50,7 +50,7 @@ const Register = () => {
         navigate('/registration-success');
       } else {
         const data = await response.json();
-        setError(data.message || 'Registration failed');
+        setError(data.message && 'Registration failed');
       }
     } catch (error) {
       setError('An error occurred. Please try again.');

@@ -8,6 +8,12 @@ import './Settings.css';
 const Settings = () => {
   const [darkMode, setDarkMode] = useState(false);
 
+  const handleLogout = () => {
+    if (window.confirm('Are you sure you want to log out?')) {
+      localStorage.removeItem('email');
+      navigate('/', { state: { fromLogout: true } });
+    }
+  };
   //load dark mode setting from local storage
   useEffect(() => {
     const savedTheme = localStorage.getItem('darkMode') === 'true';
@@ -37,6 +43,7 @@ const Settings = () => {
           onChange={handleThemeChange}
         />
       </Form>
+      <Button onClick={handleLogout} className="btn button fixed-size-button">Logout</Button>
       <Button onClick={() => navigate('/home')} className="btn button fixed-size-button">Home</Button>
     </div>
   );

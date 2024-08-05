@@ -3,7 +3,8 @@ import './RadioPlayer.css';
 
 const RadioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.1); // Set initial volume to 10%
+  const [volume, setVolume] = useState(0.1);
+  const [station, setStation] = useState('Jazz');
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -11,6 +12,13 @@ const RadioPlayer = () => {
       audioRef.current.volume = volume; // Set the initial volume to 10%
     }
   }, [volume]);
+
+  const stations = {
+    Jazz: 'https://live.radiospinner.com/coffee-jazz-64',
+    Gold: 'https://centova.svdns.com.br:19373/stream2',
+    Classic: 'http://philae.shoutca.st:8204/stream/1/',
+    Ambient: 'http://www.partyviberadio.com:8056/stream/1/'
+  };
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -27,10 +35,29 @@ const RadioPlayer = () => {
     audioRef.current.volume = newVolume;
   };
 
+  const handleStationChange = async (event) => {
+    const newStation = event.target.value;
+    if (isPlaying) {
+      audioRef.current.pause();
+    }
+    setStation(newStation);
+    audioRef.current.src = stations[newStation];
+    await audioRef.current.load();
+    if (isPlaying) {
+      audioRef.current.play();
+    }
+  };
+
   return (
     <div className="radio-player">
-      <h3>Radio Player</h3>
-      <audio ref={audioRef} src="https://live.radiospinner.com/coffee-jazz-64" />
+      <h2>Radio Player</h2>
+      <select className="station-select" value={station} onChange={handleStationChange}>
+        <option value="Jazz">Jazz</option>
+        <option value="Gold">Gold</option>
+        <option value="Classic">Classic</option>
+        <option value="Ambient">Ambient</option>
+      </select>
+      <audio ref={audioRef} src={stations[station]} />
       <div className="controls">
         <input
           type="range"

@@ -1,17 +1,29 @@
-.radio-player .controls {
+.station-select {
+  width: 200px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+
+
+.radio-player {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+}
+
+.controls {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  margin-top: 20px;
 }
 
-.slider{
-  width: 100% 
-}
 
-.radio-player button {
-  margin-top: 10px; /* Optional: Adds space above the button */
-}
 
-h3{
-  margin-top: 30px;
-}
