@@ -35,7 +35,7 @@ const Feedback = () => {
 
       //check if response is ok
       if (response.ok) {
-        navigate('/feedback-submitted');
+        navigate('/home', { state: { from: 'feedback' } });
       } else {
         const data = await response.json();
         setError(data.message || 'Feedback submission failed');
