@@ -13,24 +13,25 @@ const Home = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
 
-  //show notification message depending on the state of the 
+  //show notification message depending on the state of the location
   useEffect(() => {
+    //when user logs in
     if (location.state && location.state.from === 'login') {
       setNotificationMessage('You have successfully logged in!');
       setShowNotification(true);
-      setTimeout(() => setShowNotification(false), 3000); // Hide notification after 3 seconds
+      setTimeout(() => setShowNotification(false), 3000); 
+    //when user submits feedback
     } else if (location.state && location.state.from === 'feedback') {
       setNotificationMessage('Your feedback has been submitted. Thank you!');
       setShowNotification(true);
-      setTimeout(() => setShowNotification(false), 3000); // Hide notification after 3 seconds
+      setTimeout(() => setShowNotification(false), 3000); 
+    //when user saves new entry
     } else if (location.state && location.state.from === 'new-entry') {
       setNotificationMessage('Your entry has been saved!');
       setShowNotification(true);
-      setTimeout(() => setShowNotification(false), 3000); // Hide notification after 3 seconds
+      setTimeout(() => setShowNotification(false), 3000); 
     }
   }, [location.state]);
-
-  //show notification message when user gives feedback
 
 
   useEffect(() => {

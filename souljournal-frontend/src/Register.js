@@ -12,10 +12,45 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [error, setError] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [hasStartedTypingEmail, setHasStartedTypingEmail] = useState(false);
+  const [hasStartedTypingPassword, setHasStartedTypingPassword] = useState(false);
+  const [hasStartedTypingRepeatPassword, setHasStartedTypingRepeatPassword] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isRepeatPasswordValid, setIsRepeatPasswordValid] = useState(false);
   const navigate = useNavigate();
   const MIN_PASSWORD_LENGTH = 5;
 
-  //handle submit feedback
+
+  const handleEmailChange = (e) => {
+    const emailValue = e.target.value;
+    setEmail(emailValue);
+    setHasStartedTypingEmail(true);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/;
+    setIsEmailValid(emailRegex.test(emailValue));
+  };
+  
+  const handlePasswordChange = (e) => {
+    const passwordValue = e.target.value;
+    setPassword(passwordValue);
+    setHasStartedTypingPassword(true);
+    setIsPasswordValid(passwordValue.length >= MIN_PASSWORD_LENGTH);
+    setIsRepeatPasswordValid(passwordValue === repeatPassword);
+  };
+  
+  const handleRepeatPasswordChange = (e) => {
+    const repeatPasswordValue = e.target.value;
+    setRepeatPassword(repeatPasswordValue);
+    setHasStartedTypingRepeatPassword(true);
+    setIsRepeatPasswordValid(repeatPasswordValue === password);
+  };
+
+
+
+  const emailInputClass = hasStartedTypingEmail ? (isEmailValid ? 'is-valid' : 'is-invalid') : '';
+  const passwordInputClass = hasStartedTypingPassword ? (isPasswordValid ? 'is-valid' : 'is-invalid') : '';
+  const repeatPasswordInputClass = hasStartedTypingRepeatPassword ? (isRepeatPasswordValid && isPasswordValid ? 'is-valid' : 'is-invalid') : '';
+  //handle register
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== repeatPassword) {
@@ -77,6 +112,7 @@ const Register = () => {
             id="firstname"
             value={firstname}
             onChange={(e) => setFirstname(e.target.value)}
+            title='Please enter your first name.'
             required
           />
         </div>
@@ -88,6 +124,7 @@ const Register = () => {
             id="lastname"
             value={lastname}
             onChange={(e) => setLastname(e.target.value)}
+            title='Please enter your last name.'
             required
           />
         </div>
@@ -95,10 +132,10 @@ const Register = () => {
           <label htmlFor="email" className="form-label">Email</label>
           <input
             type="email"
-            className="form-control"
-            id="email"
+            className={`form-control ${emailInputClass}`}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
+            title='Please enter an email in the following format: "soul@souljournal.com'
             required
           />
         </div>
@@ -106,10 +143,11 @@ const Register = () => {
           <label htmlFor="password" className="form-label">Password</label>
           <input
             type="password"
-            className="form-control"
+            className={`form-control ${passwordInputClass}`}
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
+            title="Please enter a password with at least 5 characters."
             required
           />
         </div>
@@ -117,16 +155,17 @@ const Register = () => {
           <label htmlFor="repeatPassword" className="form-label">Repeat Password</label>
           <input
             type="password"
-            className="form-control"
+            className={`form-control ${repeatPasswordInputClass}`}
             id="repeatPassword"
             value={repeatPassword}
-            onChange={(e) => setRepeatPassword(e.target.value)}
+            onChange={handleRepeatPasswordChange}
+            title="Please repeat the password."
             required
           />
         </div>
         <div className="buttons d-flex justify-content-center w-100">
-        <button className="btn button  w-100 fixed-size-button" onClick={handleDiscard}>Back</button>
-        <button type="submit" className="btn button fixed-size-button">Register</button>
+          <button className="btn button  w-100 fixed-size-button" onClick={handleDiscard}>Back</button>
+          <button type="submit" className="btn button fixed-size-button">Register</button>
 
         </div>
       </form>
