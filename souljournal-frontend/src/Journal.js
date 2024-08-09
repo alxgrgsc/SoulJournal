@@ -11,12 +11,12 @@ const Journal = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState('');
   const [editContent, setEditContent] = useState('');
-  const [editMood, setEditMood] = useState(''); // Default mood is neutral
+  const [editMood, setEditMood] = useState(''); 
   const [showModal, setShowModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [selectedEntries, setSelectedEntries] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [entriesPerPage, setEntriesPerPage] = useState(4); // Default value
+  const [entriesPerPage, setEntriesPerPage] = useState(4); 
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
   const navigate = useNavigate();
@@ -36,7 +36,6 @@ const Journal = () => {
       //reverse entries order
       setEntries(data.reverse());
     };
-
     fetchEntries();
   }, []);
 

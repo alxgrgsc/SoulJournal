@@ -8,7 +8,6 @@ import Feedback from './Feedback';
 import RegistrationSuccess from './RegistrationSuccess';
 import Home from './Home';
 import Quotes from './Quotes';
-import FeedbackSubmitted from './FeedbackSubmitted';
 import NewEntry from './NewEntry';
 import EntrySubmitted from './EntrySubmitted'; // Import the new component
 import Journal from './Journal';
@@ -30,7 +29,6 @@ function App() {
             <Route path="/registration-success" element={<RegistrationSuccess />} />
             <Route path="/home" element={<Home />} />
             <Route path="/quotes" element={<Quotes />} />
-            <Route path="/feedback-submitted" element={<FeedbackSubmitted />} />
             <Route path="/new-entry" element={<NewEntry />} /> 
             <Route path="/entry-submitted" element={<EntrySubmitted />} /> {/* Add the new route */}
             <Route path="/journal" element={<Journal />} />
