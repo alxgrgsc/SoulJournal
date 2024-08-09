@@ -13,54 +13,57 @@ const Home = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
 
-  //show notification message depending on the state of the location
-  useEffect(() => {
-    //when user logs in
+  const handleNotification = (location) => {
     if (location.state && location.state.from === 'login') {
       setNotificationMessage('You have successfully logged in!');
       setShowNotification(true);
       setTimeout(() => setShowNotification(false), 3000); 
-    //when user submits feedback
     } else if (location.state && location.state.from === 'feedback') {
       setNotificationMessage('Your feedback has been submitted. Thank you!');
       setShowNotification(true);
       setTimeout(() => setShowNotification(false), 3000); 
-    //when user saves new entry
     } else if (location.state && location.state.from === 'new-entry') {
       setNotificationMessage('Your entry has been saved!');
       setShowNotification(true);
       setTimeout(() => setShowNotification(false), 3000); 
     }
+  };
+  
+  useEffect(() => {
+    handleNotification(location);
   }, [location.state]);
 
+const getUserDetails = async () => {
+  //get user email from local storage 
+  const email = localStorage.getItem('userEmail');
 
-  useEffect(() => {
-    //get user email from local storage 
-    const email = localStorage.getItem('userEmail');
+  //fetch user details
+  const fetchUserDetails = async () => {
+    try {
+      const response = await fetch(`http://localhost:3300/user/details?email=${email}`);
+      const data = await response.json();
+      console.log('User data:', data);
 
-    //fetch user details
-    const fetchUserDetails = async () => {
-      try {
-        const response = await fetch(`http://localhost:3300/user/details?email=${email}`);
-        const data = await response.json();
-        console.log('User data:', data); // Log the response data
+      setFirstName(data.firstName);
+      setLastName(data.lastName);
 
-        setFirstName(data.firstName);
-        setLastName(data.lastName);
-
-        //save firstname and lastname to local storage 
-        localStorage.setItem('firstName', data.firstName);
-        localStorage.setItem('lastName', data.lastName);
-      } catch (error) {
-        console.error('Error fetching user details:', error);
-      }
-    };
-
-    //check if email is present
-    if (email) {
-      fetchUserDetails();
+      //save firstname and lastname to local storage 
+      localStorage.setItem('firstName', data.firstName);
+      localStorage.setItem('lastName', data.lastName);
+    } catch (error) {
+      console.error('Error fetching user details:', error);
     }
-  }, []);
+  };
+
+  //check if email is present
+  if (email) {
+    fetchUserDetails();
+  }
+};
+
+useEffect(() => {
+  getUserDetails();
+}, []);
 
   useEffect(() => {
     console.log('First Name:', firstName);
