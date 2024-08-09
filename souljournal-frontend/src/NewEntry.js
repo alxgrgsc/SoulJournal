@@ -40,6 +40,7 @@ const NewEntry = () => {
 
       if (response.ok) {
         const result = await response.json();
+        console.log(`Entry saved: ${result}`);
         navigate('/home', { state: { from: 'new-entry' } });
       } else {
         console.error(`Failed to save entry`);

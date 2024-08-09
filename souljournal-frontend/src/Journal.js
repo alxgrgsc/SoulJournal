@@ -21,6 +21,7 @@ const Journal = () => {
   const [notificationMessage, setNotificationMessage] = useState('');
   const navigate = useNavigate();
 
+
   //fetch entries
   useEffect(() => {
     const fetchEntries = async () => {
@@ -32,7 +33,8 @@ const Journal = () => {
 
       const response = await fetch(`http://localhost:3300/journal/entries?email=${userEmail}`);
       const data = await response.json();
-      setEntries(data);
+      //reverse entries order
+      setEntries(data.reverse());
     };
 
     fetchEntries();
