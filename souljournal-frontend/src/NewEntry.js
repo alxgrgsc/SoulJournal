@@ -54,7 +54,7 @@ const NewEntry = () => {
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Date: </label>
-          <div className="form-control-plaintext">{currentDate}</div>
+          <div className="form-control-plaintext">9/8/2024</div>
         </div>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">Title</label>
