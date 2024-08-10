@@ -9,7 +9,7 @@ const RadioPlayer = () => {
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = volume; // Set the initial volume to 10%
+      audioRef.current.volume = volume; 
     }
   }, [volume]);
 

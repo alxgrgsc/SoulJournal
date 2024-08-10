@@ -105,7 +105,7 @@ const NewEntry = () => {
           <button type="submit" className="btn button fixed-size-button">Save Entry</button>
         </div>
       </form>
-      <RadioPlayer /> {/* Add the RadioPlayer component here */}
+      <RadioPlayer /> 
 
     </div>
   );
