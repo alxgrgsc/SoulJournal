@@ -9,7 +9,6 @@ import RegistrationSuccess from './RegistrationSuccess';
 import Home from './Home';
 import Quotes from './Quotes';
 import NewEntry from './NewEntry';
-import EntrySubmitted from './EntrySubmitted'; // Import the new component
 import Journal from './Journal';
 import Settings from './Settings';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -30,7 +29,6 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/quotes" element={<Quotes />} />
             <Route path="/new-entry" element={<NewEntry />} /> 
-            <Route path="/entry-submitted" element={<EntrySubmitted />} /> {/* Add the new route */}
             <Route path="/journal" element={<Journal />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
