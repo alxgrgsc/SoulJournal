@@ -49,11 +49,11 @@ const NewEntry = () => {
   };
 
   return (
-    <div className="container-fluid mt-5">
+    <div className="container-fluid ">
       <h1 className="mb-4">New Entry</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label className="form-label">Date</label>
+          <label className="form-label">Date: </label>
           <div className="form-control-plaintext">{currentDate}</div>
         </div>
         <div className="mb-3">
