@@ -35,7 +35,8 @@ app.get('/', (req, res) => {
 });
 
 //MongoDB local connection
-const dbURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/SoulJournal';
+const dbURI = process.env.MONGODB_URI; 
+
 
 //connect to MongoDB
 mongoose.connect(dbURI)
